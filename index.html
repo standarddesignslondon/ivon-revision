@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Ivon's Revision Hub – GCSE Year 10</title>
+<meta name="description" content="GCSE Year 10 End-of-Year Exam Revision Hub for Sutton Grammar School">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+  button { cursor: pointer; }
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(128,128,128,0.3); border-radius: 3px; }
+  @media (max-width: 768px) {
+    .subject-bar { gap: 6px !important; padding: 8px 12px !important; }
+    .main-content { padding: 16px 12px !important; }
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
+<script type="text/babel">
+const { useState, useEffect, useCallback, useMemo } = React;
+
+// ─── Data ────────────────────────────────────────────────────────────────────
+
+const EXAM_SCHEDULE = [
+  { date: "Mon 27 Apr", subject: "Music", time: "9:00am" },
+  { date: "Mon 27 Apr", subject: "English", time: "2:00pm" },
+  { date: "Tue 28 Apr", subject: "Chemistry", time: "10:00am" },
+  { date: "Tue 28 Apr", subject: "History", time: "11:30am" },
+  { date: "Tue 28 Apr", subject: "Maths P1", time: "2:00pm" },
+  { date: "Wed 29 Apr", subject: "Physics", time: "11:30am" },
+  { date: "Wed 29 Apr", subject: "French L&R", time: "2:00pm" },
+  { date: "Thu 30 Apr", subject: "Biology", time: "10:00am" },
+  { date: "Thu 30 Apr", subject: "English Lang P2", time: "12:00pm" },
+  { date: "Tue 5 May", subject: "Electronics", time: "9:00am" },
+  { date: "Tue 5 May", subject: "French Writing", time: "2:00pm" },
+  { date: "Wed 6 May", subject: "Maths P2", time: "2:00pm" },
+];
+
+const SUBJECTS = {
+  music: {
+    name: "Music",
+    board: "Edexcel",
+    icon: "♪",
+    color: "#e85d04",
+    examDate: "Mon 27 Apr – 9am",
+    topics: [
+      {
+        id: "release",
+        title: "Set Work: Afro Celt Sound System – 'Release'",
+        notes: [
+          { heading: "Context & Background", content: "Afro Celt Sound System (now Afro Celt) are a musical group who fuse traditional Irish/Celtic music with West African music and modern electronic dance music. 'Release' is from their album 'Volume 2: Release' (1999). The track exemplifies world music fusion — blending cultures, instruments, and production techniques." },
+          { heading: "Instrumentation", content: "The track combines Celtic instruments (uilleann pipes, hurdy-gurdy, tin whistle, bodhrán) with African instruments (djembe, talking drum, kora, balafon) and electronic/modern elements (synthesisers, drum machines, samplers, electric bass). Layering of these contrasting timbres is central to the piece's character." },
+          { heading: "Structure", content: "The piece doesn't follow a conventional verse-chorus structure. Instead it builds through layering — instruments and textures are gradually added. There are sections of building intensity followed by breakdowns where layers are stripped away. This creates a sense of journey and builds tension and release (hence the title)." },
+          { heading: "Rhythm & Metre", content: "Complex polyrhythmic textures — multiple rhythmic patterns played simultaneously. African drumming patterns interlocked with Celtic rhythmic figures. The tempo is moderate and steady, driven by the electronic beat. Cross-rhythms create a hypnotic, trance-like quality. Syncopation is used throughout." },
+          { heading: "Melody", content: "Melodic content comes primarily from the pipes, whistle, and vocal lines. Pentatonic scales are common (linking both Celtic and African traditions). Melodies are often modal rather than in conventional major/minor keys. Call-and-response patterns appear between instruments and voices. Ornamentation in the Celtic melodic lines (grace notes, slides, trills)." },
+          { heading: "Harmony & Tonality", content: "The harmony is largely modal — often based around drones and ostinato patterns rather than functional chord progressions. Pedal notes/drones underpin sections (common to both Celtic and African traditions). The overall tonality is ambiguous at times, shifting between modal centres." },
+          { heading: "Texture", content: "Texture builds from sparse/thin to dense/thick through layering. Heterophonic texture when multiple instruments play variations of the same melody simultaneously. Polyphonic sections where independent melodic lines overlap. Drone-based textures provide a foundation. The electronic production adds depth through reverb, delay, and spatial effects." },
+          { heading: "Technology & Production", content: "Sampling and looping are used extensively. Electronic effects processing on acoustic instruments. Multi-track recording allows blending of instruments recorded at different times and locations. The production bridges the gap between 'world music' and electronic dance music." },
+          { heading: "Key Exam Points", content: "Be ready to identify instruments by ear. Understand the concept of fusion — how two or more musical traditions are combined. Be able to describe texture changes using correct terminology (monophonic, homophonic, polyphonic, heterophonic). Know the difference between acoustic, electronic, and sampled sounds. Link musical features to their cultural origins (e.g. pentatonic = common to both Celtic and African)." },
+        ],
+        quiz: [
+          { q: "What two broad musical traditions does Afro Celt Sound System fuse together?", a: "Celtic/Irish music and West African music, combined with modern electronic dance music.", options: ["Classical and Jazz", "Celtic and West African with electronic", "Indian and Caribbean", "Blues and Latin American"], correct: 1 },
+          { q: "Name two Celtic instruments heard in 'Release'.", a: "Any two from: uilleann pipes, hurdy-gurdy, tin whistle, bodhrán.", options: ["Uilleann pipes and bodhrán", "Sitar and tabla", "Violin and cello", "Trumpet and saxophone"], correct: 0 },
+          { q: "Name two African instruments heard in 'Release'.", a: "Any two from: djembe, talking drum, kora, balafon.", options: ["Piano and guitar", "Djembe and kora", "Maracas and bongos", "Steel drums and congas"], correct: 1 },
+          { q: "What type of scale is common to both Celtic and African musical traditions?", a: "Pentatonic scale", options: ["Chromatic scale", "Whole-tone scale", "Pentatonic scale", "Blues scale"], correct: 2 },
+          { q: "What is the term for multiple different rhythmic patterns played at the same time?", a: "Polyrhythm", options: ["Syncopation", "Polyrhythm", "Cross-rhythm", "Rubato"], correct: 1 },
+          { q: "How does the structure of 'Release' build?", a: "Through layering — instruments and textures are gradually added, with occasional breakdowns where layers are stripped away.", options: ["Verse-chorus-verse", "Through layering and gradual addition of instruments", "ABA ternary form", "Theme and variations"], correct: 1 },
+          { q: "What is the texture called when multiple instruments play slight variations of the same melody simultaneously?", a: "Heterophonic", options: ["Homophonic", "Monophonic", "Heterophonic", "Polyphonic"], correct: 2 },
+          { q: "What underpins much of the harmony in 'Release'?", a: "Drones and ostinato patterns, rather than conventional chord progressions.", options: ["Complex jazz chords", "Standard chord progressions (I-IV-V)", "Drones and ostinato patterns", "Twelve-bar blues"], correct: 2 },
+          { q: "What electronic production techniques are used in the track?", a: "Sampling, looping, multi-track recording, effects processing (reverb, delay), drum machines, and synthesisers.", options: ["Only acoustic recording", "Sampling, looping, and effects processing", "Auto-tune and pitch correction", "Orchestra and choir overdubs"], correct: 1 },
+          { q: "What does 'modal' mean in the context of this piece's tonality?", a: "The music is based on modes (scales other than standard major/minor) — this gives it an ambiguous, neither-major-nor-minor quality.", options: ["The music follows major and minor keys strictly", "The music uses modes rather than major/minor keys", "The music has no tonal centre at all", "The music modulates frequently between keys"], correct: 1 },
+        ],
+      },
+      {
+        id: "elements",
+        title: "Musical Elements (Listening Exam Skills)",
+        notes: [
+          { heading: "The Elements of Music", content: "For the listening exam, you need to identify and describe: Pitch (high/low, melody shape, intervals), Duration/Rhythm (note lengths, tempo, time signature, syncopation, polyrhythm), Dynamics (volume — pp, p, mp, mf, f, ff, crescendo, diminuendo), Tempo (speed — allegro, andante, adagio, accelerando, rallentando), Timbre/Sonority (the quality/colour of sound, instrument identification), Texture (how layers combine — see below), Structure/Form (how a piece is organised), Silence (rests, pauses, and their effect)." },
+          { heading: "Texture Types", content: "Monophonic: a single unaccompanied melody line. Homophonic: melody with chordal accompaniment (most common in pop/rock). Polyphonic (contrapuntal): two or more independent melody lines heard together. Heterophonic: the same melody played simultaneously with slight variations. Unison: everyone plays/sings the same notes at the same time." },
+          { heading: "Describing Melody", content: "Conjunct: moves by step (notes close together). Disjunct: moves by leap (large intervals). Ascending/descending. Scalic: follows a scale pattern. Triadic: follows the notes of a chord. Sequence: a melodic pattern repeated at a different pitch. Ostinato: a short repeated pattern. Riff: a repeated pattern in pop/rock music. Improvised: made up on the spot." },
+          { heading: "Key Musical Vocabulary", content: "Anacrusis: notes before the first strong beat. Syncopation: accenting off-beats. Dotted rhythm: long-short pattern. Triplet: three notes in the time of two. Pedal/drone: sustained or repeated note. Modulation: changing key. Chromatic: using notes outside the key. Diatonic: using notes within the key. Arco: playing with the bow (strings). Pizzicato: plucking strings. Con sordino/muted: dampened sound." },
+        ],
+        quiz: [
+          { q: "What is the difference between conjunct and disjunct melody?", a: "Conjunct moves by step (small intervals), disjunct moves by leap (large intervals).", options: ["Conjunct = by step, disjunct = by leap", "Conjunct = by leap, disjunct = by step", "Conjunct = ascending, disjunct = descending", "They mean the same thing"], correct: 0 },
+          { q: "What texture has a melody with chordal accompaniment?", a: "Homophonic", options: ["Monophonic", "Polyphonic", "Homophonic", "Heterophonic"], correct: 2 },
+          { q: "What is an ostinato?", a: "A short musical pattern that is repeated throughout a piece or section.", options: ["A gradual increase in volume", "A short repeated musical pattern", "A type of ornament", "A change of key"], correct: 1 },
+          { q: "What does 'syncopation' mean?", a: "Placing emphasis on off-beats or weak beats, creating a sense of rhythmic surprise.", options: ["Playing very loudly", "Accenting off-beats/weak beats", "Gradually slowing down", "Playing in unison"], correct: 1 },
+          { q: "What is the difference between a pedal note and a drone?", a: "They're very similar — both are sustained or repeated notes. A pedal is usually in the bass; a drone is a continuous sound (often associated with bagpipes, hurdy-gurdy, or Indian music).", options: ["A pedal is sustained in the bass; a drone is continuous", "A pedal is loud; a drone is quiet", "There is no difference", "A pedal is short; a drone is long"], correct: 0 },
+          { q: "What dynamic marking means 'gradually getting louder'?", a: "Crescendo", options: ["Diminuendo", "Fortissimo", "Crescendo", "Piano"], correct: 2 },
+        ],
+      },
+    ],
+  },
+  english: {
+    name: "English Literature",
+    board: "AQA",
+    icon: "📖",
+    color: "#5e60ce",
+    examDate: "Mon 27 Apr – 2pm",
+    topics: [
+      {
+        id: "acc-characters",
+        title: "A Christmas Carol – Characters",
+        notes: [
+          { heading: "Ebenezer Scrooge", content: "Scrooge is the protagonist. At the start he is miserly, cold, and isolated — described as 'solitary as an oyster' and 'hard and sharp as flint'. He dismisses Christmas as 'Humbug!' and refuses charity, suggesting the poor should go to workhouses or 'decrease the surplus population'. Through the visits of three spirits he undergoes a complete transformation. By Stave 5 he is 'as merry as a schoolboy' and becomes generous, raising Bob's salary and becoming 'a second father' to Tiny Tim. Dickens uses Scrooge as a vehicle to show that even the most hardened person can change — a message aimed at Victorian society's wealthy classes." },
+          { heading: "Bob Cratchit", content: "Scrooge's clerk, who works in terrible conditions for low pay. Despite poverty, Bob is cheerful, loving, and devoted to his family. He represents the dignity of the working poor. Even when Tiny Tim dies (Stave 4), Bob remains kind and forgiving, never bitter toward Scrooge." },
+          { heading: "Tiny Tim", content: "Bob's youngest son, who is disabled and ill. He is pure-hearted ('God bless us, every one!'). Dickens uses Tiny Tim to evoke sympathy and show the human cost of society's neglect of the poor. His potential death is what finally begins to crack Scrooge's indifference." },
+          { heading: "Fred (Scrooge's Nephew)", content: "Scrooge's nephew represents the joy and generosity of Christmas. He persistently invites Scrooge to dinner despite being refused, saying Christmas is 'a kind, forgiving, charitable, pleasant time'. He believes Scrooge's 'offences carry their own punishment' — he pities rather than resents his uncle." },
+          { heading: "Jacob Marley", content: "Scrooge's dead business partner, who appears as a ghost weighed down by chains he 'forged in life'. He warns Scrooge that 'Mankind was my business' — the chains represent the consequences of a life spent caring only about money. He arranges the three spirit visits." },
+          { heading: "The Three Spirits", content: "Ghost of Christmas Past: childlike yet old, radiating light (truth/memory). Shows Scrooge his lonely childhood, happy apprenticeship with Fezziwig, and loss of Belle. Ghost of Christmas Present: a jolly giant with a torch (generosity). Shows the Cratchits' humble joy, reveals Ignorance and Want. Ghost of Christmas Yet to Come: a dark, silent phantom. Shows Scrooge's lonely death — unmourned and robbed. Each spirit teaches Scrooge a different lesson about compassion, connection, and consequences." },
+          { heading: "Belle", content: "Scrooge's former fiancée who broke off their engagement because 'another idol has displaced me — a golden one'. She represents the love and happiness Scrooge sacrificed for money. Her later happiness with a family contrasts sharply with Scrooge's solitude." },
+          { heading: "Fezziwig", content: "Scrooge's former employer, who threw generous Christmas parties. He shows that an employer's kindness ('his power lies in words and looks') has enormous value — contrasting with how Scrooge treats Bob Cratchit." },
+        ],
+        quiz: [
+          { q: "What simile is used to describe Scrooge's isolation in Stave 1?", a: "'Solitary as an oyster'", options: ["'Cold as ice'", "'Solitary as an oyster'", "'Hard as nails'", "'Lonely as a cloud'"], correct: 1 },
+          { q: "What does Scrooge suggest should happen to the poor?", a: "They should go to prisons and workhouses, or 'decrease the surplus population'.", options: ["They should be given charity", "They should decrease the surplus population", "They should find better jobs", "They should move to the countryside"], correct: 1 },
+          { q: "What do Marley's chains represent?", a: "The consequences of a selfish life spent caring only about money — each link forged by his greed and indifference to others.", options: ["His crimes as a businessman", "The weight of his money", "Consequences of selfishness and greed", "His punishment for stealing"], correct: 2 },
+          { q: "What does Marley say should have been his 'business'?", a: "'Mankind was my business. The common welfare was my business; charity, mercy, forbearance, and benevolence'", options: ["Making more money", "Mankind, charity, mercy, and benevolence", "Running his company better", "Looking after his family"], correct: 1 },
+          { q: "Why did Belle break off her engagement to Scrooge?", a: "Because money ('a golden idol') had replaced her in his affections — he had become a different man from the one she fell in love with.", options: ["He was too busy working", "A golden idol (money) had displaced her", "He was unkind to her family", "She fell in love with someone else"], correct: 1 },
+          { q: "What lesson does Fezziwig teach Scrooge (and the reader)?", a: "That an employer's kindness and generosity costs little but means everything — 'his power lies in words and looks', and 'the happiness he gives is quite as great as if it cost a fortune'.", options: ["That business always comes first", "That employer kindness costs little but means everything", "That Christmas parties are wasteful", "That money buys happiness"], correct: 1 },
+          { q: "How is Scrooge described at the end of the novella (Stave 5)?", a: "Transformed — 'as light as a feather, as happy as an angel, as merry as a schoolboy'. He raises Bob's salary and becomes 'a second father' to Tiny Tim.", options: ["Still grumpy but slightly kinder", "Transformed — merry as a schoolboy, generous", "Exactly the same as before", "Sad and regretful"], correct: 1 },
+        ],
+      },
+      {
+        id: "acc-themes",
+        title: "A Christmas Carol – Themes & Context (AO3)",
+        notes: [
+          { heading: "Social Responsibility & Poverty", content: "The central theme. Dickens wrote the novella in 1843 to highlight the suffering of the poor in Victorian England. The 1834 Poor Law Amendment Act forced the poor into workhouses — Scrooge echoes this cruel attitude ('Are there no workhouses?'). Ignorance and Want (the children under the Ghost of Christmas Present's robe) personify society's neglect. Dickens argues that the wealthy have a duty to help — 'Mankind was my business'." },
+          { heading: "Redemption & Transformation", content: "Scrooge's journey from miser to generous benefactor shows that people can change. Dickens suggests this change is available to everyone — the novella was a call to action for wealthy Victorians. The structure (five staves, like a carol) reinforces the musical, celebratory nature of this transformation." },
+          { heading: "Christmas & Generosity", content: "Christmas represents everything Scrooge initially rejects — family, warmth, charity, togetherness. The Cratchits' joyful Christmas dinner, despite poverty, contrasts with Scrooge's lonely, cold existence. Fred calls Christmas 'a kind, forgiving, charitable, pleasant time'." },
+          { heading: "Family & Isolation", content: "Scrooge's isolation is self-imposed — he rejected Belle, ignored Fan's son Fred, and chose money over human connection. The spirits show him what he has lost and what he could have. The Cratchits represent the warmth of family even in poverty." },
+          { heading: "Capitalism & Greed", content: "Dickens criticises the idea that business and profit are all that matter. Marley's regret ('Mankind was my business'), Fezziwig's generosity, and Belle's accusation of a 'golden idol' all challenge Victorian capitalist values." },
+          { heading: "Key Context (AO3)", content: "Published 1843 during the Industrial Revolution. Huge wealth gap between rich and poor. Child labour was widespread. The 1834 Poor Law made conditions deliberately harsh to discourage claims. Thomas Malthus's theory of 'surplus population' influenced attitudes to the poor — Scrooge echoes this directly. Dickens himself experienced poverty as a child (his father was imprisoned for debt, and young Charles worked in a blacking factory). The novella was deliberately priced cheaply so working people could afford it." },
+        ],
+        quiz: [
+          { q: "What year was A Christmas Carol published, and why does this matter?", a: "1843, during the Industrial Revolution when there was a huge gap between rich and poor and the 1834 Poor Law had made conditions harsh for the poor.", options: ["1843 — during Industrial Revolution and harsh Poor Laws", "1901 — at the start of the modern era", "1776 — during the American Revolution", "1860 — during the American Civil War"], correct: 0 },
+          { q: "What was the 1834 Poor Law Amendment Act?", a: "It stopped giving money directly to the poor and forced them into workhouses with deliberately harsh conditions to discourage people from claiming help.", options: ["It gave more money to the poor", "It forced the poor into harsh workhouses", "It abolished child labour", "It created free schools for the poor"], correct: 1 },
+          { q: "What do the children Ignorance and Want represent?", a: "Society's neglect of the poor — Ignorance represents lack of education, Want represents poverty. The Ghost warns 'most of all beware this boy [Ignorance], for on his brow I see that written which is Doom'.", options: ["Scrooge's own children", "Society's neglect — lack of education and poverty", "The Cratchit children", "Christmas and Easter"], correct: 1 },
+          { q: "Why is the novella structured in five 'staves' rather than chapters?", a: "A stave is a section of a musical score — it connects to the title (a 'carol') and emphasises the celebratory, song-like nature of the story and its message.", options: ["It was a printing error", "Staves connect to 'carol' — musical, celebratory structure", "Dickens couldn't think of another word", "Five was his lucky number"], correct: 1 },
+          { q: "What personal experience of Dickens influenced his portrayal of poverty?", a: "As a child, his father was imprisoned for debt and young Charles had to work in a blacking (boot polish) factory — he experienced poverty and its humiliation first-hand.", options: ["He grew up wealthy and felt guilty", "His father was imprisoned for debt; Charles worked in a factory as a child", "He was a teacher in a workhouse", "He visited America and saw slavery"], correct: 1 },
+          { q: "What is Malthusianism and how does Scrooge echo it?", a: "Thomas Malthus argued the population would outgrow food supply, so the poor dying was 'natural'. Scrooge echoes this with 'decrease the surplus population' — Dickens was attacking this cold economic view of human life.", options: ["A theory about surplus population — Scrooge echoes it directly", "A theory about Christmas celebrations", "A theory about education reform", "A theory about industrial progress"], correct: 0 },
+        ],
+      },
+      {
+        id: "poetry-overview",
+        title: "Love & Relationships Poetry – Overview",
+        notes: [
+          { heading: "The Anthology", content: "AQA's Love & Relationships cluster contains 15 poems. In the exam, you'll be given one poem printed on the paper and asked to compare it with another poem of your choice from the cluster. You need to know all 15 poems well enough to write about them from memory (they won't be printed). Focus on themes, language techniques, structure, and how to compare poems effectively." },
+          { heading: "Romantic Love Poems", content: "Sonnet 29 (Barrett Browning): passionate, overwhelming love — nature imagery of wild vines. Porphyria's Lover (Browning): obsessive, possessive love — dramatic monologue, murder. Singh Song! (Nagra): joyful, playful love — dialect, humour, cultural identity. Winter Swans (Sheers): love reconciliation — nature as metaphor. The Farmer's Bride (Mew): unrequited/controlling love — the wife as wild animal." },
+          { heading: "Family Love Poems", content: "Before You Were Mine (Duffy): possessive daughter-to-mother love — nostalgia. Walking Away (Day Lewis): parent watching child grow independent — painful letting go. Follower (Heaney): father-son relationship reversal — admiration to role reversal. Eden Rock (Causley): parents in the afterlife — peaceful, accepting. Mother, any distance (Armitage): leaving home — anchor and kite extended metaphor. Climbing My Grandfather (Waterhouse): extended climbing metaphor — physical closeness." },
+          { heading: "Other Relationships", content: "When We Two Parted (Byron): bitterness after a secret relationship ends. Love's Philosophy (Shelley): argument for physical love — nature as persuasion. Neutral Tones (Hardy): bitter memory of love ending — bleak nature imagery. Letters From Yorkshire (Dooley): distance and connection — different worlds." },
+          { heading: "Comparison Tips", content: "Always compare: same theme, different treatment (e.g. both about parent-child love but one positive, one painful). Link to context where relevant. Use the structure: Point → Evidence (quote) → Analysis → Compare → Evidence → Analysis. Cover language AND structure in your comparison." },
+        ],
+        quiz: [
+          { q: "In 'Sonnet 29', what does Barrett Browning compare her thoughts about her lover to?", a: "Wild vines growing around a tree — 'my thoughts do twine and bud / About thee, as wild vines, about a tree'.", options: ["Stars in the sky", "Wild vines around a tree", "Waves crashing on shore", "Birds flying south"], correct: 1 },
+          { q: "In 'Walking Away', what metaphor does Day Lewis use for his son leaving?", a: "'Like a satellite / wrenched from its orbit' — and later 'a half-fledged thing set free / Into a wilderness'. The poem ends: 'love is proved in the letting go'.", options: ["A bird learning to fly only", "A satellite wrenched from its orbit", "A ship leaving harbour", "A leaf falling from a tree"], correct: 1 },
+          { q: "What is the extended metaphor in 'Mother, any distance'?", a: "A tape measure — the mother holds the 'zero end' while the speaker climbs higher. She is the 'anchor' and he is the 'kite'. The measuring tape represents the stretching parent-child bond.", options: ["A bridge between two shores", "A tape measure — anchor and kite", "A ladder to the sky", "A river flowing downhill"], correct: 1 },
+          { q: "In 'Neutral Tones', what does the natural setting reflect?", a: "The bleakness and death of the relationship — 'the sun was white, as though chidden of God', leaves are 'grey' and fallen, the pond is still. Pathetic fallacy throughout.", options: ["Joy and new beginnings", "Bleakness and death of the relationship", "Anger and passion", "Hope for the future"], correct: 1 },
+          { q: "What is the final line of 'Eden Rock' and what does it suggest?", a: "'I had not thought that it would be like this' — it suggests crossing from life to death is peaceful and natural, not frightening.", options: ["'I miss them every day'", "'I had not thought that it would be like this'", "'They will never come back'", "'I stood alone and wept'"], correct: 1 },
+          { q: "In 'The Farmer's Bride', what does comparing the wife to a hare suggest?", a: "She is terrified, wild, and trapped — 'We chased her, flying like a hare'. The animal imagery suggests she is prey and the farmer is the hunter. It highlights the power imbalance and her fear.", options: ["She is fast and athletic", "She is terrified, trapped — prey to his hunter", "She loves the countryside", "She is playful and free"], correct: 1 },
+        ],
+      },
+    ],
+  },
+  chemistry: {
+    name: "Chemistry",
+    board: "OCR",
+    icon: "⚗",
+    color: "#0077b6",
+    examDate: "Tue 28 Apr – 10am",
+    topics: [
+      {
+        id: "chem-atomic",
+        title: "Atomic Structure & the Periodic Table",
+        notes: [
+          { heading: "Atomic Model History", content: "The model of the atom has changed over time: Dalton's solid sphere → Thomson's plum pudding model (discovery of electrons, negative charges in positive 'dough') → Rutherford's nuclear model (alpha scattering experiment showed most mass in a tiny positive nucleus) → Bohr's model (electrons orbit in specific energy levels/shells) → Modern model with protons and neutrons in the nucleus (Chadwick discovered neutrons ~20 years after the nucleus was accepted)." },
+          { heading: "Sub-atomic Particles", content: "Protons: relative mass 1, relative charge +1, found in nucleus. Neutrons: relative mass 1, relative charge 0, found in nucleus. Electrons: relative mass ~1/2000 (negligible), relative charge -1, found in shells/energy levels around the nucleus. Atomic number = number of protons. Mass number = protons + neutrons. In a neutral atom, number of electrons = number of protons." },
+          { heading: "Isotopes", content: "Atoms of the same element with different numbers of neutrons. Same atomic number, different mass number. Same chemical properties (same electron configuration) but different physical properties (different mass)." },
+          { heading: "Electronic Configuration", content: "Electrons fill shells: 1st shell holds 2, 2nd holds 8, 3rd holds 8 (at GCSE level). The electron configuration determines chemical properties. Elements in the same group have the same number of outer-shell electrons." },
+          { heading: "The Periodic Table", content: "Arranged by atomic number. Groups (columns) = same number of outer electrons = similar properties. Periods (rows) = same number of electron shells. Group 1: alkali metals (1 outer electron, very reactive). Group 7: halogens (7 outer electrons, reactive non-metals). Group 0: noble gases (full outer shell, unreactive). Metals on the left, non-metals on the right. Transition metals in the middle block." },
+        ],
+        quiz: [
+          { q: "What experiment led to the nuclear model of the atom?", a: "The alpha particle scattering experiment (Rutherford). Most alpha particles passed straight through gold foil, but some were deflected and a few bounced back, showing the atom is mostly empty space with a small, dense, positive nucleus.", options: ["Thompson's cathode ray experiment", "Rutherford's alpha particle scattering", "Chadwick's neutron discovery", "Bohr's spectral analysis"], correct: 1 },
+          { q: "An atom has atomic number 11 and mass number 23. How many protons, neutrons, and electrons does it have?", a: "11 protons, 12 neutrons (23-11), 11 electrons", options: ["11p, 12n, 11e", "23p, 11n, 23e", "12p, 11n, 12e", "11p, 11n, 23e"], correct: 0 },
+          { q: "What are isotopes?", a: "Atoms of the same element with different numbers of neutrons (same atomic number, different mass number).", options: ["Atoms with different numbers of protons", "Atoms of the same element with different neutrons", "Atoms with no electrons", "Different elements with the same mass"], correct: 1 },
+          { q: "Why do elements in the same group have similar chemical properties?", a: "Because they have the same number of electrons in their outer shell, and chemical properties are determined by outer-shell electrons.", options: ["Same number of neutrons", "Same number of outer-shell electrons", "Same total number of electrons", "Same mass number"], correct: 1 },
+          { q: "What is the electron configuration of chlorine (atomic number 17)?", a: "2, 8, 7", options: ["2, 7, 8", "2, 8, 7", "2, 8, 8", "8, 8, 1"], correct: 1 },
+        ],
+      },
+      {
+        id: "chem-bonding",
+        title: "Bonding & Structure",
+        notes: [
+          { heading: "Ionic Bonding", content: "Metal + non-metal. Metals lose outer electrons to form positive ions (cations). Non-metals gain electrons to form negative ions (anions). Electrostatic attraction between oppositely charged ions. Ionic compounds form giant ionic lattices — regular arrangement of ions. Properties: high melting/boiling points (strong electrostatic forces), conduct electricity when molten or dissolved (ions free to move), do not conduct when solid (ions fixed in place)." },
+          { heading: "Covalent Bonding", content: "Non-metal + non-metal. Atoms share pairs of electrons. Each shared pair = one covalent bond. Simple molecular structures (e.g. H₂O, CO₂): low melting/boiling points (weak intermolecular forces between molecules), do not conduct electricity (no free charges). Giant covalent structures (e.g. diamond, silicon dioxide): very high melting points, very hard, do not conduct (except graphite)." },
+          { heading: "Metallic Bonding", content: "Metal atoms arranged in layers. Outer electrons delocalised (free to move through the structure). Positive metal ions in a 'sea' of delocalised electrons. Properties: conduct electricity (delocalised electrons carry charge), malleable (layers can slide over each other), high melting points (strong metallic bonds)." },
+          { heading: "Dot-and-Cross Diagrams", content: "Show the arrangement of electrons in bonding. For ionic: show electron transfer. For covalent: show shared pairs. Only outer-shell electrons need to be shown. Use dots for one atom's electrons and crosses for the other." },
+        ],
+        quiz: [
+          { q: "Why do ionic compounds have high melting points?", a: "Because there are strong electrostatic forces of attraction between oppositely charged ions in the giant ionic lattice, which require a lot of energy to overcome.", options: ["Weak forces between molecules", "Strong electrostatic forces between ions", "Covalent bonds are very strong", "The atoms are very large"], correct: 1 },
+          { q: "Why can ionic compounds conduct electricity when dissolved but not when solid?", a: "When dissolved (or molten), the ions are free to move and carry charge. In a solid, ions are held in fixed positions in the lattice.", options: ["Electrons can flow in solution", "Ions are free to move when dissolved but fixed in solid", "Water helps electricity flow", "The bonds break in water"], correct: 1 },
+          { q: "Why does diamond have a very high melting point?", a: "Diamond is a giant covalent structure where each carbon atom is bonded to four others by strong covalent bonds. Many strong bonds must be broken, requiring lots of energy.", options: ["It has ionic bonds", "Each carbon has 4 strong covalent bonds in a giant structure", "It has metallic bonding", "It has weak intermolecular forces"], correct: 1 },
+          { q: "Why are metals good conductors of electricity?", a: "Because they have delocalised (free) electrons that can move through the structure and carry charge.", options: ["They have ions that can move", "They have delocalised electrons", "They have covalent bonds", "They are shiny"], correct: 1 },
+        ],
+      },
+    ],
+  },
+  history: {
+    name: "History",
+    board: "CIE IGCSE",
+    icon: "🏛",
+    color: "#9d4edd",
+    examDate: "Tue 28 Apr – 11:30am",
+    topics: [
+      {
+        id: "weimar-republic",
+        title: "The Weimar Republic 1918–1929",
+        notes: [
+          { heading: "The End of WW1 & Revolution", content: "By 1918, Germany was losing WW1. Naval mutiny at Kiel (Oct 1918) sparked revolution across Germany. Kaiser Wilhelm II abdicated on 9 November 1918. Friedrich Ebert (SPD) became the first president of the new republic. The armistice was signed on 11 November 1918. Many Germans felt the army had been 'stabbed in the back' by politicians (the Dolchstoßlegende / stab-in-the-back myth) — they blamed the 'November Criminals' who signed the armistice." },
+          { heading: "The Weimar Constitution", content: "The new constitution was drawn up in Weimar (Berlin was too dangerous). Key features: President elected every 7 years (head of state, controlled army, could rule by decree using Article 48 in emergencies). Chancellor appointed by president (head of government, needed Reichstag support). Reichstag (parliament) elected by proportional representation — all men and women over 20 could vote. Bill of Rights guaranteed freedoms. Strengths: democratic, universal suffrage, civil rights. Weaknesses: proportional representation led to many small parties and coalition governments; Article 48 could be abused; president had too much power." },
+          { heading: "The Treaty of Versailles (1919)", content: "Germany had no say in the treaty — it was a 'diktat' (dictated peace). Key terms: War Guilt Clause (Article 231) — Germany accepted blame for the war. Reparations — £6.6 billion to be paid. Military restrictions — army limited to 100,000, no air force, navy limited to 6 battleships, no submarines, Rhineland demilitarised. Territory lost — Alsace-Lorraine to France, Eupen-Malmedy to Belgium, Posen and West Prussia to Poland (Polish Corridor), all overseas colonies, Saar coalfields under League of Nations control for 15 years. Germans were humiliated and furious — they called it a 'diktat'. The treaty weakened the Weimar government from the start." },
+          { heading: "Early Threats: Left and Right", content: "Spartacist Uprising (Jan 1919): Communist revolt in Berlin led by Rosa Luxemburg and Karl Liebknecht. Crushed by the Freikorps (ex-soldiers). Both leaders killed. Kapp Putsch (March 1920): Right-wing Freikorps attempt to overthrow the government in Berlin. Government fled; defeated by a general strike of Berlin workers. These showed the Weimar Republic was under attack from both extremes." },
+          { heading: "Hyperinflation Crisis (1923)", content: "Germany fell behind on reparations payments. France and Belgium occupied the Ruhr (Germany's industrial heartland) in January 1923. German workers went on 'passive resistance' (strike) — government printed money to pay them. This caused hyperinflation: prices doubled every few days. A loaf of bread cost 200 billion marks by November 1923. Savings became worthless overnight. Workers paid twice daily, rushed to spend before prices rose again. Middle class worst affected — they lost their savings. Some benefited — those with debts or physical assets. The crisis discredited the Weimar government further." },
+          { heading: "The Stresemann Era (1923–1929)", content: "Gustav Stresemann became Chancellor (Aug 1923), then Foreign Minister until his death in 1929. Key achievements: Rentenmark — new currency introduced November 1923, ended hyperinflation. Dawes Plan (1924) — rescheduled reparations, USA loaned Germany $200 million. Young Plan (1929) — reduced total reparations by ~75%, extended payment period. Locarno Pact (1925) — Germany accepted western borders, improving relations with France/Britain. League of Nations — Germany joined in 1926, restoring international respectability. Cultural golden age — Bauhaus architecture, Expressionist art, Berlin nightlife, cinema (Fritz Lang). Criticisms: prosperity depended on American loans; extremists (Nazis, Communists) were only temporarily weakened, not eliminated; not everyone shared in the prosperity." },
+        ],
+        quiz: [
+          { q: "What was the 'stab-in-the-back' myth (Dolchstoßlegende)?", a: "The false belief that the German army had not been defeated in WW1 but was betrayed by politicians ('November Criminals') who signed the armistice.", options: ["That generals betrayed the Kaiser", "That politicians betrayed the undefeated army by signing the armistice", "That soldiers refused to fight", "That Britain cheated in the war"], correct: 1 },
+          { q: "What was Article 48 of the Weimar Constitution?", a: "It allowed the President to rule by decree (pass laws without the Reichstag) in an emergency — this was later abused by Hitler.", options: ["It guaranteed freedom of speech", "It set up proportional representation", "It allowed the President to rule by decree in emergencies", "It limited the army to 100,000"], correct: 2 },
+          { q: "Why was proportional representation a weakness of the Weimar Republic?", a: "It meant many small parties won seats, making it almost impossible for one party to get a majority — leading to weak coalition governments that struggled to agree on policies.", options: ["It gave too much power to one party", "It led to weak coalition governments with many small parties", "It prevented women from voting", "It was too expensive to run"], correct: 1 },
+          { q: "How much were Germany's reparations set at under the Treaty of Versailles?", a: "£6.6 billion", options: ["£1 billion", "£6.6 billion", "£66 billion", "£660 million"], correct: 1 },
+          { q: "What was the War Guilt Clause?", a: "Article 231 of the Treaty of Versailles — it forced Germany to accept full blame for causing WW1. Germans found this deeply humiliating.", options: ["Germany had to disarm completely", "Germany accepted full blame for causing WW1", "Germany lost all its territory", "Germany had to become a republic"], correct: 1 },
+          { q: "What caused the hyperinflation of 1923?", a: "France occupied the Ruhr after Germany missed reparations payments. German workers went on strike, and the government printed huge amounts of money to pay them, causing the currency to become worthless.", options: ["The stock market crashed", "France occupied the Ruhr and Germany printed money to pay striking workers", "Germany spent too much on the military", "Britain imposed a trade blockade"], correct: 1 },
+          { q: "What was the Dawes Plan (1924)?", a: "An agreement that rescheduled Germany's reparations payments and arranged for US loans of $200 million to help Germany's economic recovery.", options: ["A plan to rebuild the German army", "Rescheduled reparations and arranged US loans", "A plan to overthrow the Weimar Republic", "A treaty with France about the Rhineland"], correct: 1 },
+          { q: "Who were the Spartacists?", a: "A communist group led by Rosa Luxemburg and Karl Liebknecht who attempted a revolution in Berlin in January 1919. They were crushed by the Freikorps.", options: ["Right-wing nationalists", "Communists who attempted revolution in Berlin, Jan 1919", "Supporters of the Kaiser", "Members of the Weimar government"], correct: 1 },
+          { q: "Why is 1924–1929 sometimes called the 'Golden Age' of Weimar?", a: "Because Stresemann stabilised the economy (new currency, US loans), improved foreign relations (Locarno, League of Nations), and there was a cultural flowering in art, architecture, and cinema. But this prosperity was fragile — it depended on American loans.", options: ["Germany won a war", "Economic stability, improved foreign relations, and cultural flowering", "The Kaiser returned to power", "Germany stopped paying reparations"], correct: 1 },
+          { q: "What was the Kapp Putsch (1920)?", a: "A right-wing attempt to overthrow the Weimar government, led by Wolfgang Kapp and supported by Freikorps units. It was defeated when Berlin workers went on general strike, paralysing the city.", options: ["A communist uprising in Munich", "A right-wing coup defeated by a workers' general strike", "A French invasion of Germany", "An assassination of the President"], correct: 1 },
+        ],
+      },
+      {
+        id: "nazi-rise",
+        title: "The Rise of the Nazis 1919–1933",
+        notes: [
+          { heading: "Early Nazi Party", content: "The German Workers' Party (DAP) was founded in 1919 by Anton Drexler. Hitler joined in September 1919 as member no. 555 (numbering started at 500 to look bigger). He quickly became the party's best speaker. In 1920, the party was renamed the National Socialist German Workers' Party (NSDAP/Nazi Party) and announced the 25-Point Programme — key points included: abolishing the Treaty of Versailles, uniting all Germans in a Greater Germany, excluding Jews from citizenship, nationalising large businesses. By 1921, Hitler was party leader. The SA (Sturmabteilung/Brownshirts) was formed as the party's paramilitary wing." },
+          { heading: "The Munich Putsch (November 1923)", content: "Hitler attempted to seize power in Munich as a first step to overthrowing the Weimar government. On 8 November, he burst into a beer hall meeting and forced local leaders to support him. The next day, ~2,000 Nazis marched through Munich but were met by police — 16 Nazis and 4 police were killed. Hitler was arrested. Short-term failure: the putsch was easily crushed, the Nazi Party was banned, Hitler was imprisoned. Long-term significance: Hitler's trial gave him national publicity. He wrote Mein Kampf in prison (outlining his ideology: racial purity, Lebensraum, anti-Semitism, Führerprinzip). He decided to gain power legally through elections, not force — the 'legality strategy'." },
+          { heading: "The Lean Years (1924–1929)", content: "After his release (Dec 1924, served only 9 months), Hitler reorganised the party. He set up a national party structure with local branches (Gaue). He created the SS (Schutzstaffel) as his personal bodyguard (later run by Himmler). He established the Hitler Youth. The Nazi Party won only 12 seats in the 1928 Reichstag election (2.6% of vote) — their extreme message had limited appeal during the prosperous Stresemann years. But the party machinery was in place, ready for when conditions changed." },
+          { heading: "The Wall Street Crash & Depression (1929–1933)", content: "In October 1929, the US stock market crashed. American banks recalled their loans to Germany (Dawes/Young Plan money). German businesses collapsed, banks failed. By 1932, 6 million Germans were unemployed (~1 in 3 workers). The depression was devastating: poverty, homelessness, hunger. The Weimar government seemed unable to cope — Chancellor Brüning used Article 48 to cut wages and benefits, making things worse. People lost faith in democracy and turned to extremist parties. The Nazis offered simple answers: blame the Jews, the communists, and the Treaty of Versailles." },
+          { heading: "How Hitler Became Chancellor", content: "Nazi electoral success: 12 seats (1928) → 107 seats (1930) → 230 seats (July 1932, largest party). Why people voted Nazi: promised jobs and bread, promised to tear up Versailles, promised strong leadership, fear of communism, effective propaganda (Goebbels), Hitler's powerful speeches, SA intimidation of opponents. Key factors in appointment: President Hindenburg initially refused to appoint Hitler. In 1932, Franz von Papen (Chancellor) couldn't get Reichstag support. Kurt von Schleicher replaced him but also failed. Von Papen persuaded Hindenburg to appoint Hitler as Chancellor on 30 January 1933, believing they could control him — 'We've hired him'. They were catastrophically wrong." },
+        ],
+        quiz: [
+          { q: "What was the Munich Putsch (1923)?", a: "Hitler's failed attempt to seize power by force in Munich. It failed militarily but gave Hitler publicity and taught him to pursue power through legal/electoral means instead.", options: ["A communist uprising in Munich", "Hitler's failed attempt to seize power by force", "A successful Nazi takeover of Bavaria", "A protest against the Treaty of Versailles"], correct: 1 },
+          { q: "What was Mein Kampf?", a: "The book Hitler wrote in prison after the Munich Putsch. It outlined his ideology: racial purity/Aryan supremacy, anti-Semitism, Lebensraum (living space in the east), hatred of communism, and the Führerprinzip (leader principle).", options: ["A Nazi newspaper", "Hitler's book outlining his ideology, written in prison", "The Nazi 25-Point Programme", "A speech Hitler gave at his trial"], correct: 1 },
+          { q: "Why did the Wall Street Crash help the Nazis?", a: "US banks recalled loans to Germany, causing economic collapse and mass unemployment (6 million by 1932). People lost faith in the Weimar government and turned to extremist parties like the Nazis, who promised jobs, strong leadership, and simple scapegoats.", options: ["It made Hitler rich", "Economic collapse and mass unemployment drove people to extremist parties", "It destroyed the communist party", "It forced the Kaiser to return"], correct: 1 },
+          { q: "Who said 'We've hired him' about Hitler becoming Chancellor, and why was he wrong?", a: "Franz von Papen, who believed he and other conservative politicians could control Hitler as Chancellor. They were catastrophically wrong — Hitler quickly dismantled democracy and established a dictatorship.", options: ["Hindenburg — he thought Hitler would resign quickly", "Von Papen — he thought conservatives could control Hitler", "Goebbels — he thought Hitler would share power", "Brüning — he thought Article 48 would limit Hitler"], correct: 1 },
+          { q: "How many Reichstag seats did the Nazis win in July 1932?", a: "230 seats, making them the largest party in the Reichstag (though without an overall majority).", options: ["12 seats", "107 seats", "230 seats", "340 seats"], correct: 2 },
+          { q: "What was the SA (Sturmabteilung)?", a: "The Nazi paramilitary force, also known as the Brownshirts. They protected Nazi meetings, disrupted opponents' meetings, and intimidated political enemies through violence.", options: ["Hitler's personal bodyguard", "The Nazi paramilitary force (Brownshirts)", "The German secret police", "The regular German army"], correct: 1 },
+          { q: "Name three reasons people voted for the Nazis by 1932.", a: "Any three from: promised jobs/economic recovery, promised to tear up Treaty of Versailles, fear of communism, effective propaganda (Goebbels), Hitler's powerful public speaking, SA intimidation, promise of strong leadership, simple scapegoats (Jews, communists).", options: ["They had the best economic plan only", "Jobs promise, fear of communism, effective propaganda/speeches", "They were the most moderate party", "They promised to keep the Weimar constitution"], correct: 1 },
+          { q: "What was the 'legality strategy'?", a: "Hitler's decision (after the failed Munich Putsch) to gain power through winning elections and working within the democratic system, rather than through violent revolution.", options: ["Using the SA to overthrow the government", "Gaining power through elections rather than force", "Forming an alliance with the communists", "Assassinating political opponents"], correct: 1 },
+        ],
+      },
+      {
+        id: "nazi-consolidation",
+        title: "Nazi Consolidation of Power 1933–1934",
+        notes: [
+          { heading: "The Reichstag Fire (27 Feb 1933)", content: "The Reichstag building was set on fire. A Dutch communist, Marinus van der Lubbe, was arrested. Hitler used it as evidence of a communist plot against Germany. The Reichstag Fire Decree (28 Feb) suspended civil liberties — freedom of speech, press, and assembly were removed. Police could search homes and detain people without trial. Thousands of communists and political opponents were arrested. This was the first major step toward dictatorship." },
+          { heading: "The Enabling Act (23 March 1933)", content: "Officially the 'Law to Remedy the Distress of the People and the Reich'. It allowed Hitler to pass laws without the Reichstag for 4 years — effectively ended democracy. Passed with 444 votes to 94 (only the SPD voted against; KPD members had been arrested or banned). SA intimidated Reichstag members during the vote. Centre Party supported it after Hitler promised to protect Catholic rights. This was the legal basis for Hitler's dictatorship." },
+          { heading: "Eliminating Opposition", content: "Trade unions banned (May 1933) — replaced by the DAF (German Labour Front). All political parties except the NSDAP banned (July 1933) — Germany became a one-party state. State parliaments abolished — Germany became a centralised state. Concordat with the Pope (July 1933) — Hitler promised not to interfere with the Catholic Church; in return the Church agreed to stay out of politics. (Hitler later broke this agreement.)" },
+          { heading: "The Night of the Long Knives (30 June 1934)", content: "Hitler ordered the SS to murder leaders of the SA, including Ernst Röhm (SA leader). Around 85+ people were killed over several days (some estimates higher). Why? The SA (3 million strong) were a threat — Röhm wanted to merge the SA with the army. The army generals distrusted the SA and would only support Hitler if the SA was dealt with. Hitler also used it to eliminate other political rivals (e.g. von Schleicher). The result: the army swore an oath of personal loyalty to Hitler; the SS became the dominant force; no one dared oppose Hitler." },
+          { heading: "Hitler Becomes Führer (August 1934)", content: "President Hindenburg died on 2 August 1934. Hitler merged the roles of President and Chancellor, becoming 'Führer and Reich Chancellor'. The army swore a personal oath of loyalty to Hitler (not to Germany or the constitution). A plebiscite (public vote) was held — 90% approved. Hitler now had total power: he was head of state, head of government, and supreme commander of the armed forces. The Weimar Republic was dead." },
+        ],
+        quiz: [
+          { q: "Why was the Reichstag Fire so useful to Hitler?", a: "It gave him the excuse to issue the Reichstag Fire Decree, which suspended civil liberties, allowed mass arrests of communists and opponents, and created a climate of fear that helped the Nazis tighten their grip on power.", options: ["It destroyed the communist party headquarters", "It gave him an excuse to suspend civil liberties and arrest opponents", "It proved that democracy was dangerous", "It made him popular with firefighters"], correct: 1 },
+          { q: "What did the Enabling Act (March 1933) allow Hitler to do?", a: "Pass laws for four years without needing the approval of the Reichstag. This effectively ended democracy in Germany and was the legal foundation of his dictatorship.", options: ["Hold new elections", "Pass laws without the Reichstag — ending democracy", "Declare war on France", "Arrest the President"], correct: 1 },
+          { q: "Why did Hitler order the Night of the Long Knives?", a: "To eliminate the SA leadership (especially Röhm) who threatened his power, and to win the loyalty of the army generals who distrusted the SA. He also used it to settle scores with other political rivals.", options: ["The SA had tried to assassinate him", "To eliminate SA leadership, win army loyalty, and remove rivals", "The SA had lost an election", "To punish the SA for the Reichstag Fire"], correct: 1 },
+          { q: "How did Hitler become Führer?", a: "When President Hindenburg died in August 1934, Hitler merged the roles of President and Chancellor into one — 'Führer and Reich Chancellor'. The army swore personal loyalty to him, and a plebiscite showed 90% public approval.", options: ["He won a presidential election", "He merged President and Chancellor roles after Hindenburg's death", "The Reichstag voted him supreme leader", "He was appointed by the Kaiser"], correct: 1 },
+          { q: "Why was the army's oath of loyalty to Hitler personally (not to Germany) so significant?", a: "It meant every soldier was personally bound to obey Hitler, not the state or constitution. This made it almost impossible for the army to legally oppose him, even if his orders were immoral or destructive.", options: ["It was just a tradition with no real meaning", "It bound soldiers personally to Hitler, making opposition almost impossible", "It gave soldiers the right to disobey", "It was only symbolic"], correct: 1 },
+          { q: "When did Germany become a one-party state?", a: "July 1933, when all political parties except the NSDAP (Nazi Party) were banned.", options: ["January 1933", "July 1933", "August 1934", "November 1933"], correct: 1 },
+        ],
+      },
+      {
+        id: "nazi-germany",
+        title: "Life in Nazi Germany 1933–1939",
+        notes: [
+          { heading: "Nazi Economic Policies", content: "Hitler promised to reduce unemployment — and did: 6 million unemployed (1933) → under 1 million by 1939. How? Rearmament — massive spending on weapons, tanks, planes, ships (breaking the Treaty of Versailles). Conscription reintroduced (1935) — took men out of the unemployment figures. Public works — autobahns (motorways), public buildings, housing. RAD (Reich Labour Service) — all young men had to do 6 months' labour service. 'Invisible unemployment' — Jews, women, and opponents removed from figures. Wages were lower than in 1928 and workers couldn't strike (unions banned), but most Germans were grateful to have jobs." },
+          { heading: "Propaganda & Censorship (Goebbels)", content: "Joseph Goebbels was Minister of Propaganda. He controlled all media — newspapers, radio, cinema, books, art, music. Cheap radios (Volksempfänger) ensured Nazi messages reached every home. Spectacular rallies (e.g. Nuremberg) and events (1936 Berlin Olympics) projected power and unity. Book burnings destroyed 'un-German' works. All art, music, and culture had to conform to Nazi ideals. The aim: to create a 'national community' (Volksgemeinschaft) united behind Hitler." },
+          { heading: "Terror & Control (SS, Gestapo, Courts)", content: "The SS (under Himmler) became the main instrument of terror — ran concentration camps, enforced racial policies. The Gestapo (secret police) spied on the population — people could be arrested without charge. The SD (Security Service) gathered intelligence on opponents. People's Courts tried political offences with no jury and no right of appeal. A climate of fear: neighbours informed on neighbours, children reported parents. Block wardens monitored every street." },
+          { heading: "Women in Nazi Germany", content: "Nazi ideology: women's role was 'Kinder, Küche, Kirche' (children, kitchen, church). Policies to increase birth rate: marriage loans (reduced if you had children), Mother's Cross (bronze for 4 children, silver for 6, gold for 8), banned contraception and abortion. Women discouraged from working in professions — pushed out of law, medicine, and civil service. No make-up, trousers, or hair dye encouraged. By late 1930s, labour shortages meant women were needed in factories — policy quietly reversed." },
+          { heading: "Young People & Education", content: "Hitler Youth (boys) and League of German Maidens (BDM, girls) — membership compulsory from 1936. Boys: military training, camping, fitness, political indoctrination. Girls: domestic skills, physical fitness, preparation for motherhood. Schools: curriculum rewritten — biology focused on racial theory, history glorified Germany, PE given much more time. Jewish teachers and students expelled. Textbooks rewritten with Nazi ideology. Not all young people conformed: Edelweiss Pirates and Swing Youth resisted Nazi control of culture." },
+          { heading: "Persecution of Jews", content: "Nazi anti-Semitism escalated in stages: 1933: boycott of Jewish shops, Jews banned from civil service. 1935: Nuremberg Laws — Jews stripped of German citizenship, marriage between Jews and non-Jews banned. 1938: Kristallnacht (Night of Broken Glass, 9–10 November) — synagogues burned, Jewish shops smashed, ~30,000 Jewish men sent to concentration camps. Jews then banned from schools, businesses, and public places. Forced to wear the Star of David. By 1939, around half of Germany's Jewish population had emigrated. Those who remained faced increasingly horrific persecution." },
+        ],
+        quiz: [
+          { q: "How did the Nazis reduce unemployment from 6 million to under 1 million?", a: "Through rearmament (weapons production), public works (autobahns), conscription, RAD (compulsory labour service), and 'invisible unemployment' (removing Jews, women, and opponents from the statistics).", options: ["By giving everyone government jobs", "Rearmament, public works, conscription, RAD, and hiding figures", "By importing workers from other countries", "By reducing the working week"], correct: 1 },
+          { q: "What were the Nuremberg Laws (1935)?", a: "Laws that stripped Jews of German citizenship and banned marriage or sexual relations between Jews and non-Jews. They were a key step in the legal persecution of Jews.", options: ["Laws banning all political parties", "Laws stripping Jews of citizenship and banning intermarriage", "Laws about military conscription", "Laws setting up concentration camps"], correct: 1 },
+          { q: "What was Kristallnacht and when did it happen?", a: "The 'Night of Broken Glass', 9–10 November 1938. Nazi-organised attacks on Jewish synagogues, homes, and businesses across Germany. Around 30,000 Jewish men were arrested and sent to concentration camps.", options: ["A night of celebration in 1933", "Organised attacks on Jewish property, Nov 1938", "The night Hitler became Chancellor", "A military parade in 1936"], correct: 1 },
+          { q: "What was the role of Goebbels?", a: "Minister of Propaganda — he controlled all media (press, radio, cinema, books, art) to spread Nazi ideology and create a cult of personality around Hitler.", options: ["Head of the SS", "Minister of Propaganda — controlled all media", "Commander of the army", "Head of the Gestapo"], correct: 1 },
+          { q: "What does 'Kinder, Küche, Kirche' mean and what did it represent?", a: "'Children, Kitchen, Church' — the Nazi ideal for women's role in society: bearing children, managing the home, and being devout. Women were pushed out of professions.", options: ["A type of German food", "Children, Kitchen, Church — the ideal role for women", "A Nazi youth organisation", "A type of school curriculum"], correct: 1 },
+          { q: "Why did the Nazis make Hitler Youth membership compulsory?", a: "To indoctrinate young people with Nazi ideology from an early age, ensure loyalty to Hitler, prepare boys for military service and girls for motherhood, and prevent any alternative youth cultures.", options: ["To keep children fit and healthy", "To indoctrinate youth, ensure loyalty, and prepare for their future roles", "To replace school education", "To provide childcare for working parents"], correct: 1 },
+          { q: "What was the Gestapo?", a: "The secret state police, who spied on the population, arrested political opponents without charge, and created a climate of fear. People could be detained indefinitely without trial.", options: ["The regular police force", "The secret police who arrested opponents without charge", "Hitler's personal bodyguard", "The military police"], correct: 1 },
+          { q: "Name two groups of young people who resisted the Nazis.", a: "The Edelweiss Pirates (working-class youth who rejected Hitler Youth, some attacked Nazi officials) and the Swing Youth (middle-class young people who listened to banned American jazz and swing music).", options: ["The SA and the SS", "The Edelweiss Pirates and the Swing Youth", "The Spartacists and the Freikorps", "The White Rose and the Red Orchestra"], correct: 1 },
+        ],
+      },
+    ],
+  },
+  maths: {
+    name: "Maths",
+    board: "Edexcel",
+    icon: "📐",
+    color: "#e63946",
+    examDate: "Tue 28 Apr – 2pm / Wed 6 May – 2pm",
+    topics: [
+      {
+        id: "circle-theorems",
+        title: "Circle Theorems",
+        notes: [
+          { heading: "The Key Theorems", content: "1. Angle at the centre is twice the angle at the circumference (from the same arc). 2. Angle in a semicircle is 90° (angle subtended by a diameter). 3. Angles in the same segment are equal. 4. Opposite angles in a cyclic quadrilateral add up to 180°. 5. Tangent to a circle is perpendicular (90°) to the radius at the point of contact. 6. Two tangents from an external point are equal in length. 7. The alternate segment theorem: the angle between a tangent and a chord equals the angle in the alternate segment. 8. The perpendicular from the centre to a chord bisects the chord." },
+          { heading: "How to Spot Them", content: "Look for: a diameter (semicircle → 90°). Two angles from the same arc (same segment → equal). An angle at centre and circumference from same arc (centre = 2× circumference). A quadrilateral with all vertices on the circle (cyclic → opposite angles = 180°). A tangent line touching the circle (tangent ⊥ radius, or alternate segment). Always state which theorem you're using in your working." },
+        ],
+        quiz: [
+          { q: "Angle at the centre from an arc is 124°. What is the angle at the circumference from the same arc?", a: "62°. The angle at the centre is twice the angle at the circumference, so 124 ÷ 2 = 62°.", options: ["248°", "62°", "124°", "56°"], correct: 1 },
+          { q: "A quadrilateral has all four vertices on a circle. One angle is 73°. What is the opposite angle?", a: "107°. Opposite angles in a cyclic quadrilateral sum to 180°. 180 - 73 = 107°.", options: ["73°", "107°", "146°", "90°"], correct: 1 },
+          { q: "What angle does a tangent make with the radius at the point of contact?", a: "90° — the tangent is perpendicular to the radius.", options: ["45°", "60°", "90°", "180°"], correct: 2 },
+          { q: "An angle in a semicircle (subtended by the diameter) is always…", a: "90°", options: ["45°", "60°", "90°", "180°"], correct: 2 },
+        ],
+      },
+      {
+        id: "algebra",
+        title: "Algebra (Equations, Expanding, Factorising)",
+        notes: [
+          { heading: "Linear Equations", content: "Solve by isolating the variable. Use inverse operations. Example: 3x + 7 = 22 → 3x = 15 → x = 5. With unknowns on both sides: 5x - 3 = 2x + 12 → 3x = 15 → x = 5. With brackets: 2(3x - 1) = 16 → 6x - 2 = 16 → 6x = 18 → x = 3." },
+          { heading: "Expanding Brackets", content: "Single bracket: 3(2x + 5) = 6x + 15. Double brackets (FOIL): (x + 3)(x - 2) = x² - 2x + 3x - 6 = x² + x - 6. Triple brackets: expand two first, then multiply by the third. Difference of two squares: (a + b)(a - b) = a² - b²." },
+          { heading: "Factorising", content: "Single bracket: 6x² + 9x = 3x(2x + 3). Quadratics (x² + bx + c): find two numbers that multiply to c and add to b. Example: x² + 7x + 12 = (x + 3)(x + 4). Difference of two squares: x² - 49 = (x + 7)(x - 7). When a ≠ 1: e.g. 2x² + 5x + 3, find two numbers that multiply to 2×3=6 and add to 5 (→ 2 and 3), then split and factorise." },
+          { heading: "Solving Quadratics by Factorising", content: "Set equation = 0, factorise, then set each bracket = 0. Example: x² + 5x + 6 = 0 → (x + 2)(x + 3) = 0 → x = -2 or x = -3. Example: x² - 9 = 0 → (x + 3)(x - 3) = 0 → x = 3 or x = -3." },
+          { heading: "Algebraic Fractions", content: "Simplify by factorising numerator and denominator, then cancelling common factors. Adding/subtracting: find common denominator (like normal fractions). Multiplying: multiply numerators and denominators. Dividing: flip the second fraction and multiply." },
+        ],
+        quiz: [
+          { q: "Expand and simplify: (x + 4)(x - 3)", a: "x² - 3x + 4x - 12 = x² + x - 12", options: ["x² + x - 12", "x² - x - 12", "x² + x + 12", "x² + 7x - 12"], correct: 0 },
+          { q: "Factorise: x² - 16", a: "(x + 4)(x - 4) — difference of two squares", options: ["(x + 4)(x + 4)", "(x + 4)(x - 4)", "(x - 8)(x + 2)", "(x + 16)(x - 1)"], correct: 1 },
+          { q: "Solve: x² + 3x - 10 = 0", a: "(x + 5)(x - 2) = 0, so x = -5 or x = 2", options: ["x = 5 or x = -2", "x = -5 or x = 2", "x = 10 or x = -1", "x = -3 or x = 10"], correct: 1 },
+          { q: "Solve: 4x - 7 = 2x + 5", a: "2x = 12, so x = 6", options: ["x = 6", "x = -6", "x = 1", "x = 12"], correct: 0 },
+          { q: "Factorise fully: 6x² + 9x", a: "3x(2x + 3)", options: ["3(2x² + 3x)", "3x(2x + 3)", "x(6x + 9)", "9x(x + 1)"], correct: 1 },
+        ],
+      },
+      {
+        id: "trig-pythag",
+        title: "Pythagoras & Trigonometry",
+        notes: [
+          { heading: "Pythagoras' Theorem", content: "For right-angled triangles: a² + b² = c² (where c is the hypotenuse). To find the hypotenuse: c = √(a² + b²). To find a shorter side: a = √(c² - b²). Works in 2D and 3D (find the diagonal of a cuboid by applying Pythagoras twice). Example: sides 3 and 4 → hyp = √(9+16) = √25 = 5." },
+          { heading: "SOH CAH TOA", content: "sin θ = Opposite / Hypotenuse. cos θ = Adjacent / Hypotenuse. tan θ = Opposite / Adjacent. To find an angle: use inverse functions (sin⁻¹, cos⁻¹, tan⁻¹). To find a side: rearrange the formula. Label the triangle first: hypotenuse (longest, opposite right angle), opposite (across from the angle you're using), adjacent (next to the angle, not hypotenuse)." },
+          { heading: "Exact Trig Values", content: "You must memorise: sin 0° = 0, sin 30° = ½, sin 45° = √2/2, sin 60° = √3/2, sin 90° = 1. cos 0° = 1, cos 30° = √3/2, cos 45° = √2/2, cos 60° = ½, cos 90° = 0. tan 0° = 0, tan 30° = √3/3, tan 45° = 1, tan 60° = √3." },
+          { heading: "Bearings", content: "Always measured clockwise from North. Always written as 3 figures (e.g. 045°, 270°). To find a bearing, draw a North line at your starting point, then measure clockwise. Bearings problems often combine with trigonometry." },
+        ],
+        quiz: [
+          { q: "A right-angled triangle has sides 5cm and 12cm. What is the hypotenuse?", a: "√(25 + 144) = √169 = 13cm", options: ["17 cm", "13 cm", "7 cm", "60 cm"], correct: 1 },
+          { q: "What is sin 30°?", a: "½ (or 0.5)", options: ["√3/2", "½", "1", "√2/2"], correct: 1 },
+          { q: "In a right triangle, the opposite side is 8 and the hypotenuse is 10. What is sin θ?", a: "sin θ = opposite/hypotenuse = 8/10 = 0.8", options: ["0.6", "0.8", "1.25", "0.4"], correct: 1 },
+          { q: "What is cos 60°?", a: "½ (or 0.5)", options: ["√3/2", "1", "½", "0"], correct: 2 },
+          { q: "A bearing must always be written as how many figures?", a: "Three figures (e.g. 045° not 45°), measured clockwise from North.", options: ["One figure", "Two figures", "Three figures", "Four figures"], correct: 2 },
+        ],
+      },
+      {
+        id: "number-skills",
+        title: "Number (Surds, Indices, Percentages, Ratio)",
+        notes: [
+          { heading: "Surds", content: "A surd is an irrational root that can't be simplified to a whole number (e.g. √2, √3, √5). Rules: √a × √b = √(ab). √a ÷ √b = √(a/b). Simplify by finding square factors: √12 = √(4×3) = 2√3. Rationalising the denominator: multiply top and bottom by the surd. 1/√3 = √3/3." },
+          { heading: "Indices (Powers)", content: "Rules: aᵐ × aⁿ = aᵐ⁺ⁿ. aᵐ ÷ aⁿ = aᵐ⁻ⁿ. (aᵐ)ⁿ = aᵐⁿ. a⁰ = 1. a⁻ⁿ = 1/aⁿ. a^(1/n) = ⁿ√a. a^(m/n) = (ⁿ√a)ᵐ. Example: 8^(2/3) = (³√8)² = 2² = 4. Example: 5⁻² = 1/25." },
+          { heading: "Percentages", content: "Percentage of amount: 15% of 60 = 0.15 × 60 = 9. Percentage change = (change/original) × 100. Percentage increase: multiply by (1 + r). Percentage decrease: multiply by (1 - r). Compound interest/growth: multiply by (1 + r)ⁿ for n periods. Reverse percentage: if a price after 20% increase is £60, original = 60 ÷ 1.2 = £50." },
+          { heading: "Ratio", content: "Simplify ratios like fractions (divide by common factors). Sharing in a ratio: add parts, divide total by number of parts, multiply. Example: share £200 in ratio 3:2 → 5 parts → £40 each → £120 and £80. Converting between ratio, fraction, and percentage. Combining ratios: if A:B = 2:3 and B:C = 3:5, then A:B:C = 2:3:5." },
+          { heading: "Standard Form", content: "A × 10ⁿ where 1 ≤ A < 10. Large numbers: 45000 = 4.5 × 10⁴. Small numbers: 0.003 = 3 × 10⁻³. Calculating: multiply/divide the numbers, add/subtract the powers. Make sure A is between 1 and 10 in your final answer." },
+          { heading: "Bounds of Accuracy", content: "A measurement of 7.3 cm (to 1dp) has bounds: lower = 7.25, upper = 7.35. The error interval is 7.25 ≤ x < 7.35. For calculations: to find maximum of A×B, use upper bound of A × upper bound of B. To find minimum of A÷B, use lower bound of A ÷ upper bound of B." },
+        ],
+        quiz: [
+          { q: "Simplify √50", a: "√50 = √(25×2) = 5√2", options: ["√50", "5√2", "25√2", "2√5"], correct: 1 },
+          { q: "Evaluate 27^(1/3)", a: "³√27 = 3", options: ["9", "3", "27", "1/3"], correct: 1 },
+          { q: "A TV costs £400. It is reduced by 15%. What is the new price?", a: "400 × 0.85 = £340", options: ["£340", "£385", "£360", "£60"], correct: 0 },
+          { q: "Share £150 in the ratio 2:3", a: "5 parts total. Each part = £30. So £60 and £90.", options: ["£60 and £90", "£75 and £75", "£50 and £100", "£30 and £120"], correct: 0 },
+          { q: "Write 0.00045 in standard form", a: "4.5 × 10⁻⁴", options: ["45 × 10⁻⁵", "4.5 × 10⁻⁴", "4.5 × 10⁻³", "0.45 × 10⁻³"], correct: 1 },
+          { q: "A length is 12.4 cm to 1 decimal place. What are the bounds?", a: "Lower bound = 12.35 cm, Upper bound = 12.45 cm", options: ["12.3 to 12.5", "12.35 to 12.45", "12.39 to 12.41", "12.0 to 13.0"], correct: 1 },
+        ],
+      },
+      {
+        id: "statistics",
+        title: "Statistics (Data, Averages, Graphs)",
+        notes: [
+          { heading: "Averages & Range", content: "Mean = total ÷ number of values. Median = middle value when in order (for n values, median is the (n+1)/2 th value). Mode = most common value. Range = highest - lowest. From a frequency table: mean = Σfx ÷ Σf. Estimated mean from grouped data: use midpoints of each class." },
+          { heading: "Cumulative Frequency & Box Plots", content: "Cumulative frequency = running total. Plot at upper class boundary. Use to find median (½n), lower quartile (¼n), upper quartile (¾n). Interquartile range (IQR) = UQ - LQ (measures spread of middle 50%). Box plots show: minimum, LQ, median, UQ, maximum. Compare distributions using median (average) and IQR (consistency)." },
+          { heading: "Histograms", content: "Frequency density = frequency ÷ class width. The AREA of each bar represents frequency (not the height). Bars can have different widths. To find frequency from a histogram: frequency = frequency density × class width. Used for continuous data with unequal class widths." },
+        ],
+        quiz: [
+          { q: "The cumulative frequency is 60. What position is the median?", a: "60 ÷ 2 = 30th value", options: ["15th", "30th", "60th", "31st"], correct: 1 },
+          { q: "In a histogram, what does the area of a bar represent?", a: "The frequency (number of data points in that class).", options: ["The mean", "The frequency", "The range", "The class width"], correct: 1 },
+          { q: "What is the interquartile range?", a: "IQR = upper quartile - lower quartile. It measures the spread of the middle 50% of the data.", options: ["Highest - lowest", "Upper quartile - lower quartile", "Mean - median", "Mode - mean"], correct: 1 },
+          { q: "A class has interval 10-20 and frequency 15. What is the frequency density?", a: "Class width = 10. Frequency density = 15 ÷ 10 = 1.5", options: ["15", "1.5", "150", "0.5"], correct: 1 },
+        ],
+      },
+    ],
+  },
+  physics: {
+    name: "Physics",
+    board: "AQA",
+    icon: "⚡",
+    color: "#f77f00",
+    examDate: "Wed 29 Apr – 11:30am",
+    topics: [
+      {
+        id: "radioactivity",
+        title: "Radioactivity",
+        notes: [
+          { heading: "Atomic Structure", content: "Atoms have a tiny, dense, positively charged nucleus (protons + neutrons) surrounded by electrons in energy levels. Protons: charge +1, mass 1. Neutrons: charge 0, mass 1. Electrons: charge -1, mass ~0. Atomic number = number of protons. Mass number = protons + neutrons. Isotopes = same element, different number of neutrons. Atoms are about 1×10⁻¹⁰ m in radius; the nucleus is less than 1/10,000 of that." },
+          { heading: "History of the Atom", content: "Dalton: solid sphere. Thomson: plum pudding model (electrons in positive 'dough'). Rutherford: alpha scattering experiment → nuclear model (small dense positive nucleus, mostly empty space). Bohr: electrons in fixed orbits/energy levels. Chadwick: discovered neutrons (~20 years after the nuclear model). Each new model replaced the last when new evidence was found." },
+          { heading: "Types of Radiation", content: "Alpha (α): 2 protons + 2 neutrons (helium nucleus). Stopped by paper/skin. Range ~5cm in air. Strongly ionising. Beta (β): high-speed electron from nucleus (neutron → proton). Stopped by aluminium. Range ~1m in air. Moderately ionising. Gamma (γ): electromagnetic radiation from nucleus. Stopped by thick lead/concrete. Infinite range. Weakly ionising. In nuclear equations: alpha decay reduces mass number by 4 and atomic number by 2. Beta decay keeps mass number the same but increases atomic number by 1." },
+          { heading: "Half-life", content: "Radioactive decay is random — you cannot predict which nucleus will decay next. Half-life = the time taken for the number of unstable nuclei (or the count rate/activity) to halve. After 1 half-life: ½ remains. After 2: ¼. After 3: ⅛. To calculate: if activity drops from 800 to 100 Bq in 30 minutes, it has halved 3 times (800→400→200→100), so the half-life is 30÷3 = 10 minutes." },
+          { heading: "Uses & Hazards", content: "Contamination: unwanted radioactive material on/in objects or people — the material itself is present. Irradiation: being exposed to radiation from a source — the object doesn't become radioactive. Medical uses: gamma rays to destroy cancer cells (radiotherapy), tracers to explore internal organs. Background radiation: always present from natural sources (rocks, cosmic rays, radon gas) and man-made sources (nuclear accidents, medical). Radiation dose measured in sieverts (Sv)." },
+          { heading: "Nuclear Fission & Fusion", content: "Fission: splitting a large unstable nucleus (uranium/plutonium) after absorbing a neutron → two smaller nuclei + 2–3 neutrons + gamma rays + energy. The released neutrons can cause more fissions → chain reaction. Controlled in nuclear reactors for power. Uncontrolled = nuclear weapon. Fusion: joining two light nuclei to form a heavier one. Releases energy. Powers the Sun. Requires extremely high temperatures and pressures." },
+        ],
+        quiz: [
+          { q: "What did Rutherford's alpha scattering experiment show about the atom?", a: "That the atom is mostly empty space with a small, dense, positively charged nucleus — because most alpha particles passed straight through the gold foil, but a few were deflected or bounced back.", options: ["Atoms are solid spheres", "Atoms are mostly empty space with a small dense positive nucleus", "Electrons are inside the nucleus", "Atoms have no charge"], correct: 1 },
+          { q: "What is an alpha particle made of?", a: "2 protons and 2 neutrons — the same as a helium nucleus.", options: ["2 electrons", "2 protons and 2 neutrons (a helium nucleus)", "1 proton and 1 electron", "A high-energy photon"], correct: 1 },
+          { q: "A radioactive sample has an activity of 1200 Bq. After 45 minutes it has an activity of 150 Bq. What is the half-life?", a: "15 minutes. 1200→600→300→150 = 3 half-lives in 45 minutes, so 45÷3 = 15 minutes.", options: ["45 minutes", "22.5 minutes", "15 minutes", "9 minutes"], correct: 2 },
+          { q: "What is the difference between contamination and irradiation?", a: "Contamination is when radioactive material gets onto or into an object/person (the source is present). Irradiation is being exposed to radiation from a separate source (the object doesn't become radioactive).", options: ["They mean the same thing", "Contamination = material present; irradiation = exposure from a separate source", "Contamination is worse than irradiation always", "Irradiation makes objects radioactive"], correct: 1 },
+          { q: "In beta decay, what happens inside the nucleus?", a: "A neutron changes into a proton and emits a high-speed electron (the beta particle). The mass number stays the same but the atomic number increases by 1.", options: ["A proton leaves the nucleus", "A neutron turns into a proton and emits an electron", "Two protons and two neutrons are released", "The nucleus splits in half"], correct: 1 },
+          { q: "What is a chain reaction in nuclear fission?", a: "When the neutrons released by one fission event go on to cause further fissions in other nuclei, which release more neutrons, causing more fissions — and so on. In a reactor this is controlled; in a weapon it is uncontrolled.", options: ["When atoms combine together", "Neutrons from one fission cause more fissions, releasing more neutrons", "When radiation passes through materials", "When alpha particles are absorbed"], correct: 1 },
+        ],
+      },
+      {
+        id: "forces-motion",
+        title: "Forces & Motion",
+        notes: [
+          { heading: "Scalars & Vectors", content: "Scalar: magnitude only (e.g. speed, distance, mass, temperature, energy). Vector: magnitude AND direction (e.g. velocity, displacement, force, acceleration, momentum). Vectors can be represented by arrows — length = magnitude, direction = direction of arrow." },
+          { heading: "Speed, Velocity & Acceleration", content: "Speed = distance ÷ time (s = vt). Typical speeds: walking ~1.5 m/s, running ~3 m/s, cycling ~6 m/s, speed of sound in air ~330 m/s. Velocity = speed in a given direction (vector). Acceleration = change in velocity ÷ time (a = Δv/t). Uniform acceleration equation: v² – u² = 2as. Free fall acceleration near Earth ≈ 9.8 m/s²." },
+          { heading: "Distance-Time & Velocity-Time Graphs", content: "Distance-time: gradient = speed. Straight line = constant speed. Steeper = faster. Curved = accelerating. Horizontal = stationary. Velocity-time: gradient = acceleration. Flat line = constant velocity. Area under graph = distance travelled. Upward slope = acceleration. Downward slope = deceleration." },
+          { heading: "Newton's Three Laws", content: "1st Law: An object stays at rest or moves at constant velocity unless acted on by a resultant force. (Inertia.) 2nd Law: F = ma. Resultant force = mass × acceleration. Greater force = greater acceleration. Greater mass = less acceleration for same force. 3rd Law: Every action has an equal and opposite reaction. Forces always come in pairs acting on different objects." },
+          { heading: "Forces, Weight & Resultant Forces", content: "Weight = mass × gravitational field strength (W = mg). Weight acts at centre of mass. Measured with a newtonmeter. Contact forces: friction, air resistance, tension, normal contact. Non-contact: gravity, electrostatic, magnetic. Resultant force: the single force that has the same effect as all forces acting together. If resultant = 0, object is in equilibrium." },
+          { heading: "Stopping Distance", content: "Stopping distance = thinking distance + braking distance. Thinking distance affected by: speed, reaction time (tiredness, drugs, alcohol, distractions). Typical reaction time: 0.2–0.9s. Braking distance affected by: speed, road conditions (wet/icy), tyre/brake condition, mass of vehicle. When braking, kinetic energy is transferred to thermal energy in brakes (friction). Greater speed → much greater braking force needed → danger of overheating brakes or skidding." },
+          { heading: "Momentum", content: "Momentum = mass × velocity (p = mv). Unit: kg m/s. Conservation of momentum: in a closed system, total momentum before = total momentum after an event. F = mΔv/Δt (force = rate of change of momentum). Safety features (seatbelts, airbags, crumple zones, crash mats) increase the time over which momentum changes, reducing the force on the person." },
+          { heading: "Energy & Work", content: "Work done = force × distance (W = Fs). One joule = one newton × one metre. Kinetic energy: KE = ½mv². Gravitational potential energy: GPE = mgh. Work done against friction → temperature rise." },
+        ],
+        quiz: [
+          { q: "What is the difference between speed and velocity?", a: "Speed is a scalar (magnitude only) — how fast something is moving. Velocity is a vector (magnitude AND direction) — how fast and in which direction.", options: ["They are the same thing", "Speed is scalar (magnitude only), velocity is vector (magnitude + direction)", "Velocity is always faster than speed", "Speed includes direction, velocity doesn't"], correct: 1 },
+          { q: "State Newton's Second Law as an equation.", a: "F = ma (resultant force = mass × acceleration)", options: ["E = mc²", "F = ma", "v = u + at", "p = mv"], correct: 1 },
+          { q: "A car of mass 1200 kg accelerates at 2 m/s². What is the resultant force?", a: "F = ma = 1200 × 2 = 2400 N", options: ["600 N", "1200 N", "2400 N", "4800 N"], correct: 2 },
+          { q: "What does the area under a velocity-time graph represent?", a: "The distance travelled (or displacement).", options: ["Speed", "Acceleration", "Distance travelled", "Force"], correct: 2 },
+          { q: "Why do airbags reduce injury in a crash?", a: "They increase the time over which the person's momentum changes to zero. Since force = change in momentum ÷ time, increasing the time reduces the force acting on the person.", options: ["They make the car lighter", "They increase time of momentum change, reducing force on the person", "They stop the car faster", "They absorb all the kinetic energy"], correct: 1 },
+          { q: "A 0.5 kg ball is moving at 8 m/s. What is its kinetic energy?", a: "KE = ½mv² = ½ × 0.5 × 8² = ½ × 0.5 × 64 = 16 J", options: ["4 J", "8 J", "16 J", "32 J"], correct: 2 },
+          { q: "What factors increase braking distance?", a: "Higher speed, wet or icy road conditions, worn tyres or brakes, greater mass of vehicle.", options: ["Driver tiredness and alcohol", "Speed, road conditions, tyre/brake condition, vehicle mass", "Only the speed of the car", "The colour of the car"], correct: 1 },
+        ],
+      },
+      {
+        id: "electric-circuits",
+        title: "Electric Circuits",
+        notes: [
+          { heading: "Current, Charge & Potential Difference", content: "Current = flow of electrical charge. I = Q/t (charge = current × time). Current is the same at every point in a series circuit. Potential difference (voltage) = energy transferred per unit charge. V = IR (Ohm's Law). V = W/Q (energy transferred = charge × pd). A pd is needed to make charge flow." },
+          { heading: "Resistance & Ohm's Law", content: "Resistance opposes current flow. V = IR → R = V/I. An ohmic conductor has constant resistance (straight line through origin on V-I graph). Filament lamp: resistance increases as temperature increases (curve on V-I graph). Diode: very high resistance in one direction, low in the other (current flows one way only). Thermistor: resistance decreases as temperature increases (used in thermostats). LDR: resistance decreases as light intensity increases (used in automatic lights)." },
+          { heading: "Series & Parallel Circuits", content: "Series: same current through all components. Total pd shared between components. Total resistance = R₁ + R₂. Parallel: same pd across all branches. Total current = sum of branch currents. Total resistance is less than the smallest individual resistor. (You don't need to calculate parallel resistance at GCSE.)" },
+          { heading: "Power & Energy", content: "Power = potential difference × current (P = VI). Energy transferred = power × time (E = Pt). Energy transferred = charge × pd (E = QV). Power ratings of appliances tell you how much energy they transfer per second." },
+        ],
+        quiz: [
+          { q: "State Ohm's Law as an equation.", a: "V = IR (potential difference = current × resistance)", options: ["P = IV", "V = IR", "E = QV", "F = ma"], correct: 1 },
+          { q: "A resistor has a pd of 12V across it and a current of 3A flowing through it. What is its resistance?", a: "R = V/I = 12/3 = 4Ω", options: ["36 Ω", "4 Ω", "15 Ω", "0.25 Ω"], correct: 1 },
+          { q: "How does the resistance of a thermistor change when it gets hotter?", a: "The resistance decreases as the temperature increases.", options: ["Increases", "Decreases", "Stays the same", "Doubles"], correct: 1 },
+          { q: "In a series circuit, how is the current related at different points?", a: "The current is the same at every point in the circuit.", options: ["It decreases at each component", "It is the same everywhere", "It increases after each component", "It depends on the resistance"], correct: 1 },
+          { q: "Two resistors of 5Ω and 3Ω are connected in series. What is the total resistance?", a: "R_total = 5 + 3 = 8Ω", options: ["2 Ω", "8 Ω", "15 Ω", "1.875 Ω"], correct: 1 },
+          { q: "A 2000W kettle is on for 3 minutes. How much energy does it use?", a: "E = Pt = 2000 × 180 = 360,000 J (360 kJ). Remember to convert minutes to seconds!", options: ["6,000 J", "360,000 J", "2,000 J", "600 J"], correct: 1 },
+        ],
+      },
+      {
+        id: "kinetic-theory",
+        title: "Kinetic Theory & Particle Model",
+        notes: [
+          { heading: "States of Matter", content: "Solids: particles vibrate in fixed positions, close together, regular arrangement, strong forces. Liquids: particles close together but can move past each other, irregular arrangement, weaker forces. Gases: particles far apart, moving randomly at high speed, very weak forces, no fixed arrangement. Density = mass/volume (ρ = m/V)." },
+          { heading: "Changes of State", content: "Melting, freezing, boiling, evaporating, condensing, sublimating. These are physical changes — mass is conserved, original properties recover if reversed. During a change of state, energy is supplied but temperature stays constant (energy goes into breaking/forming bonds between particles, not increasing kinetic energy)." },
+          { heading: "Internal Energy & Specific Heat Capacity", content: "Internal energy = total kinetic + potential energy of all particles. Heating increases internal energy → raises temperature OR causes change of state. Specific heat capacity (c) = energy to raise 1 kg by 1°C. ΔE = mcΔθ. Example: to heat 2 kg of water (c = 4200 J/kg°C) from 20°C to 100°C: ΔE = 2 × 4200 × 80 = 672,000 J." },
+          { heading: "Specific Latent Heat", content: "Energy for a change of state with no temperature change. E = mL. Specific latent heat of fusion = solid ↔ liquid. Specific latent heat of vaporisation = liquid ↔ gas (always larger than fusion — more energy needed to completely separate particles)." },
+          { heading: "Gas Pressure & Temperature", content: "Gas molecules in constant random motion. Temperature is related to average kinetic energy of molecules. Higher temp → faster particles → more frequent/harder collisions with walls → higher pressure. At constant volume: pressure increases with temperature. At constant temperature: pV = constant (pressure × volume). Doing work on a gas (e.g. compressing in a bicycle pump) increases internal energy → temperature rises." },
+        ],
+        quiz: [
+          { q: "What happens to the temperature during a change of state?", a: "The temperature stays constant — the energy supplied goes into breaking or forming bonds between particles rather than increasing kinetic energy.", options: ["It increases rapidly", "It stays constant", "It decreases", "It fluctuates"], correct: 1 },
+          { q: "How much energy is needed to heat 3 kg of water (c = 4200 J/kg°C) from 25°C to 75°C?", a: "ΔE = mcΔθ = 3 × 4200 × 50 = 630,000 J", options: ["315,000 J", "630,000 J", "1,260,000 J", "12,600 J"], correct: 1 },
+          { q: "Why does a bicycle pump get hot when you pump it?", a: "Compressing the gas does work on it, which increases the internal (kinetic) energy of the gas particles, raising the temperature.", options: ["Friction between the handle and pump", "Work done on the gas increases its internal energy", "The rubber melts slightly", "Air from outside heats it up"], correct: 1 },
+          { q: "What is the equation linking pressure and volume at constant temperature?", a: "pV = constant (Boyle's Law). If volume decreases, pressure increases proportionally.", options: ["p = mv", "pV = constant", "p = ρgh", "E = mL"], correct: 1 },
+          { q: "Why is specific latent heat of vaporisation always larger than specific latent heat of fusion?", a: "Because going from liquid to gas requires completely separating particles from each other (overcoming all remaining forces), whereas melting only requires loosening the arrangement — particles stay close together.", options: ["Because gases are hotter", "Vaporisation requires completely separating particles, needing more energy", "Because liquids are heavier", "It isn't always larger"], correct: 1 },
+        ],
+      },
+      {
+        id: "heat-transfer",
+        title: "Heat Transfer",
+        notes: [
+          { heading: "Conduction", content: "Energy transfer through a material by particle vibrations. Particles vibrate more when heated → collide with neighbours → pass on kinetic energy. Metals are good conductors because they also have free/delocalised electrons which can transfer energy quickly. Insulators are poor conductors. Rate of conduction depends on: thermal conductivity of material, thickness, temperature difference, surface area." },
+          { heading: "Convection", content: "Energy transfer in fluids (liquids and gases). Heated fluid expands → becomes less dense → rises. Cooler, denser fluid sinks to replace it → forms a convection current. Only happens in fluids, not solids (particles must be free to move)." },
+          { heading: "Evaporation & Condensation", content: "Evaporation: liquid → gas at the surface (below boiling point). Fastest particles escape, so the remaining liquid cools down. Rate increases with: higher temperature, larger surface area, lower humidity, air movement (wind). Condensation: gas → liquid. Occurs when gas particles lose energy (e.g. touching a cool surface)." },
+          { heading: "Infrared Radiation", content: "All objects emit and absorb infrared radiation. Hotter objects emit more radiation. Dark, matt surfaces are better emitters and absorbers. Light, shiny surfaces are better reflectors and poorer emitters. A perfect black body absorbs all incident radiation and would be the best possible emitter. Earth's temperature depends on the balance between radiation absorbed (from the Sun) and radiation emitted back into space." },
+        ],
+        quiz: [
+          { q: "Why are metals good conductors of heat?", a: "Because they have free/delocalised electrons which can move through the structure and transfer kinetic energy quickly, in addition to energy transfer by particle vibrations.", options: ["They are shiny", "They have free electrons that transfer energy quickly", "They are heavy", "They are always hot"], correct: 1 },
+          { q: "Explain why evaporation causes cooling.", a: "The fastest-moving (highest energy) particles escape from the surface. This lowers the average kinetic energy of the remaining particles, so the temperature of the liquid decreases.", options: ["Cold air replaces the vapour", "Fastest particles escape, lowering average kinetic energy", "The liquid absorbs heat from the air", "Evaporation always happens at 100°C"], correct: 1 },
+          { q: "What type of surface is the best emitter of infrared radiation?", a: "A dark, matt (non-shiny) surface.", options: ["Light and shiny", "Dark and matt", "White and smooth", "Transparent"], correct: 1 },
+          { q: "Why can convection only happen in fluids, not solids?", a: "Because convection requires particles to move and flow — in a fluid, heated particles can rise (becoming less dense) and cooler particles can sink. In a solid, particles are fixed in position.", options: ["Solids don't absorb heat", "Fluid particles can move and flow; solid particles are fixed", "Solids are always cold", "Convection needs electricity"], correct: 1 },
+        ],
+      },
+    ],
+  },
+  french: {
+    name: "French",
+    board: "AQA",
+    icon: "🇫🇷",
+    color: "#457b9d",
+    examDate: "Wed 29 Apr – 2pm / Tue 5 May – 2pm",
+    topics: [
+      {
+        id: "french-identity",
+        title: "Theme 1: Identity & Culture – Key Vocabulary",
+        notes: [
+          { heading: "Me, My Family & Friends", content: "Je m'appelle… = My name is… J'ai … ans = I am … years old. Mon anniversaire est le… = My birthday is on… Je suis (grand/petit/mince/sportif) = I am (tall/short/slim/sporty). J'ai les yeux (bleus/verts/marron) = I have (blue/green/brown) eyes. J'ai les cheveux (bruns/blonds/noirs/roux) = I have (brown/blonde/black/red) hair. Mon père / ma mère = my father / my mother. Mon frère / ma sœur = my brother / my sister. Mon meilleur ami / ma meilleure amie = my best friend (m/f). Je m'entends bien avec… = I get on well with… On se dispute parfois = We argue sometimes. Il/elle est (gentil/drôle/ennuyeux/égoïste) = He/she is (kind/funny/boring/selfish)." },
+          { heading: "Personality & Relationships", content: "bavard(e) = chatty. travailleur/travailleuse = hardworking. paresseux/paresseuse = lazy. timide = shy. marrant(e) = funny. fidèle = loyal/faithful. compréhensif/compréhensive = understanding. têtu(e) = stubborn. jaloux/jalouse = jealous. généreux/généreuse = generous. Je m'entends bien avec lui/elle = I get on well with him/her. Nous avons beaucoup en commun = We have a lot in common. Il/elle me fait rire = He/she makes me laugh. On se connaît depuis longtemps = We've known each other a long time." },
+          { heading: "Interests, Hobbies & Aspirations", content: "J'aime / j'adore / je déteste = I like / I love / I hate. Mon passe-temps préféré est… = My favourite hobby is… Je joue au (football/tennis/rugby) = I play (football/tennis/rugby). Je joue de la (guitare/batterie) = I play the (guitar/drums). Je fais de la natation/de l'équitation = I go swimming/horse riding. J'écoute de la musique = I listen to music. Je regarde des films/des séries = I watch films/series. Je lis des livres/des BD = I read books/comics. Quand je serai grand(e), je voudrais être… = When I grow up, I'd like to be… Mon rêve serait de… = My dream would be to… J'espère aller à l'université = I hope to go to university." },
+          { heading: "Daily Routine & Lifestyle", content: "Je me réveille à… = I wake up at… Je me lève / je me douche / je me brosse les dents = I get up / shower / brush my teeth. Je prends le petit déjeuner = I have breakfast. Je quitte la maison à… = I leave the house at… Les cours commencent à… = Lessons start at… Je rentre à la maison = I come home. Je fais mes devoirs = I do my homework. Je me couche à… = I go to bed at… Le week-end, je… = At the weekend, I… Pendant les vacances… = During the holidays…" },
+        ],
+        quiz: [
+          { q: "How do you say 'I get on well with my sister' in French?", a: "Je m'entends bien avec ma sœur", options: ["Je déteste ma sœur", "Je m'entends bien avec ma sœur", "Ma sœur est ennuyeuse", "Je ne connais pas ma sœur"], correct: 1 },
+          { q: "What does 'travailleur' mean?", a: "Hardworking", options: ["Lazy", "Hardworking", "Travelling", "Working (as a job)"], correct: 1 },
+          { q: "How do you say 'When I grow up, I'd like to be a doctor'?", a: "Quand je serai grand(e), je voudrais être médecin", options: ["Je suis médecin", "Quand je serai grand, je voudrais être médecin", "J'étais médecin quand j'étais petit", "Mon père est médecin"], correct: 1 },
+          { q: "What does 'je me lève à sept heures' mean?", a: "I get up at seven o'clock", options: ["I go to bed at seven", "I get up at seven o'clock", "I leave at seven", "I eat at seven"], correct: 1 },
+          { q: "How do you say 'my favourite hobby' in French?", a: "Mon passe-temps préféré", options: ["Mon temps libre", "Mon passe-temps préféré", "Ma passion principale", "Mon activité favorite"], correct: 1 },
+          { q: "What does 'bavard(e)' mean?", a: "Chatty/talkative", options: ["Brave", "Boring", "Chatty", "Beautiful"], correct: 2 },
+          { q: "Translate: 'Nous avons beaucoup en commun'", a: "We have a lot in common", options: ["We don't have anything in common", "We have a lot in common", "We go out a lot together", "We communicate a lot"], correct: 1 },
+        ],
+      },
+      {
+        id: "french-grammar",
+        title: "Key Grammar",
+        notes: [
+          { heading: "Present Tense (Regular Verbs)", content: "-ER verbs (e.g. jouer): je joue, tu joues, il/elle joue, nous jouons, vous jouez, ils/elles jouent. -IR verbs (e.g. finir): je finis, tu finis, il finit, nous finissons, vous finissez, ils finissent. -RE verbs (e.g. vendre): je vends, tu vends, il vend, nous vendons, vous vendez, ils vendent. Key irregulars to memorise: être (je suis, tu es, il est, nous sommes, vous êtes, ils sont), avoir (j'ai, tu as, il a, nous avons, vous avez, ils ont), aller (je vais, tu vas, il va, nous allons, vous allez, ils vont), faire (je fais, tu fais, il fait, nous faisons, vous faites, ils font)." },
+          { heading: "Past Tense (Passé Composé)", content: "Formed with: avoir/être (present) + past participle. Most verbs use avoir: j'ai mangé (I ate), j'ai fini (I finished), j'ai vendu (I sold). Past participles: -ER → -é, -IR → -i, -RE → -u. MRS VAN DER TRAMP verbs use être: je suis allé(e) (I went), je suis parti(e) (I left). With être, the past participle agrees with the subject (add -e for feminine, -s for plural). Common irregulars: fait (done/made), bu (drunk), vu (seen), lu (read), pris (taken), mis (put), dit (said), écrit (written)." },
+          { heading: "Future & Conditional", content: "Near future: aller + infinitive. Je vais manger = I am going to eat. Simple future: stem + endings (-ai, -as, -a, -ons, -ez, -ont). Regular: infinitive + ending (jouer → je jouerai). Irregulars: être → je serai, avoir → j'aurai, aller → j'irai, faire → je ferai. Conditional: stem (same as future) + imperfect endings (-ais, -ais, -ait, -ions, -iez, -aient). Je voudrais = I would like. Je serais = I would be. J'aimerais = I would like/love." },
+          { heading: "Imperfect Tense", content: "Used for: descriptions in the past, habitual/repeated actions, ongoing situations. Formed: nous stem (present tense) + imperfect endings (-ais, -ais, -ait, -ions, -iez, -aient). Example: jouer → nous jouons → je jouais (I used to play / I was playing). Only irregular stem: être → ét- (j'étais). Quand j'étais petit = When I was little. Il faisait beau = The weather was nice. Je jouais au foot tous les jours = I used to play football every day." },
+          { heading: "Opinions & Justifications", content: "À mon avis / selon moi = in my opinion. Je pense que / je crois que / je trouve que = I think that. C'est (génial/super/nul/ennuyeux/intéressant) = It's (great/super/rubbish/boring/interesting). Ce qui me plaît, c'est… = What I like is… Ce que je n'aime pas, c'est… = What I don't like is… …parce que / car / puisque = because. …bien que (+ subjunctive) = although. …cependant / pourtant / néanmoins = however. Using connectives and opinion phrases lifts your grade — examiners are looking for justified opinions." },
+          { heading: "Exam Tips for All Papers", content: "Listening: read questions carefully before the audio plays. Listen for negatives (ne…pas, ne…jamais) which reverse meaning. Watch for distractors — the recording may mention several options but only one is the answer. Reading: use cognates (words similar to English) to help. Watch for faux amis (false friends): actuellement = currently (NOT actually), rester = to stay (NOT to rest). Writing: use a range of tenses (past, present, future) to access higher marks. Include opinions with justifications. Use connectives (et, mais, aussi, cependant, de plus). Check adjective agreements and verb endings." },
+        ],
+        quiz: [
+          { q: "Conjugate 'finir' in the present tense for 'nous'.", a: "nous finissons", options: ["nous finons", "nous finissons", "nous finissent", "nous finir"], correct: 1 },
+          { q: "What is the passé composé of 'je mange'?", a: "j'ai mangé (I ate / I have eaten)", options: ["je mangeais", "j'ai mangé", "je suis mangé", "je vais manger"], correct: 1 },
+          { q: "Which verbs use 'être' (not 'avoir') in the passé composé?", a: "The MRS VAN DER TRAMP verbs: monter, rester, sortir, venir, aller, naître, descendre, entrer, rentrer, tomber, retourner, arriver, mourir, partir (plus all reflexive verbs).", options: ["All verbs", "Only -ER verbs", "MRS VAN DER TRAMP verbs and reflexive verbs", "Only irregular verbs"], correct: 2 },
+          { q: "What is the near future of 'we are going to play'?", a: "Nous allons jouer (aller + infinitive)", options: ["Nous jouons", "Nous allons jouer", "Nous jouerons", "Nous avons joué"], correct: 1 },
+          { q: "How do you form the imperfect tense?", a: "Take the 'nous' stem of the present tense, remove -ons, and add imperfect endings: -ais, -ais, -ait, -ions, -iez, -aient. Only exception: être → ét-.", options: ["Use the infinitive + endings", "Nous stem + imperfect endings (-ais, -ais, -ait, etc.)", "Avoir/être + past participle", "Use the future stem"], correct: 1 },
+          { q: "Translate: 'Quand j'étais petit, je jouais au tennis'", a: "When I was little, I used to play tennis", options: ["When I am little, I play tennis", "When I was little, I used to play tennis", "When I will be little, I will play tennis", "I played tennis yesterday"], correct: 1 },
+          { q: "What does 'actuellement' mean in French? (Careful — it's a faux ami!)", a: "Currently / at the moment (NOT 'actually')", options: ["Actually", "Currently / at the moment", "Occasionally", "Actively"], correct: 1 },
+          { q: "What three things should you include in GCSE French writing to access higher marks?", a: "A range of tenses (past, present, future), opinions with justifications, and connectives/complex structures.", options: ["Long sentences only", "Range of tenses, opinions with justifications, connectives", "Perfect spelling only", "Only present tense but with lots of detail"], correct: 1 },
+        ],
+      },
+    ],
+  },
+  biology: {
+    name: "Biology",
+    board: "AQA",
+    icon: "🧬",
+    color: "#2d6a4f",
+    examDate: "Thu 30 Apr – 10am",
+    topics: [
+      {
+        id: "circulation",
+        title: "Human Circulation",
+        notes: [
+          { heading: "The Heart", content: "The heart is a double pump in a double circulatory system. Right side pumps blood to the lungs (pulmonary circuit). Left side pumps blood around the body (systemic circuit). Left ventricle has a thicker muscle wall (needs to pump blood further). Key blood vessels: aorta (oxygenated blood from left ventricle to body), vena cava (deoxygenated blood from body to right atrium), pulmonary artery (deoxygenated blood from right ventricle to lungs), pulmonary vein (oxygenated blood from lungs to left atrium), coronary arteries (supply heart muscle itself with oxygenated blood). Natural pacemaker: group of cells in the right atrium that control the resting heart rate. Artificial pacemakers correct irregular heartbeats." },
+          { heading: "Blood Vessels", content: "Arteries: carry blood away from the heart. Thick muscular walls, small lumen, elastic tissue to cope with high pressure. No valves (except aortic valve). Veins: carry blood back to the heart. Thinner walls, larger lumen, valves to prevent backflow. Lower pressure. Capillaries: tiny vessels connecting arteries to veins. One cell thick walls — allows efficient diffusion of substances (oxygen, glucose, CO₂, waste) between blood and tissues. Huge surface area." },
+          { heading: "Blood", content: "Blood is a tissue made of: Plasma — liquid that carries dissolved substances (glucose, amino acids, CO₂, urea, hormones, antibodies, proteins). Red blood cells — contain haemoglobin which binds to oxygen. Biconcave shape gives large surface area. No nucleus (more room for haemoglobin). White blood cells — fight infection. Phagocytes engulf pathogens. Lymphocytes produce antibodies. Platelets — cell fragments that help blood clot at wound sites." },
+          { heading: "Coronary Heart Disease", content: "Fatty deposits build up in coronary arteries → narrows them → reduced blood flow → heart muscle gets less oxygen → can cause a heart attack. Treatments: Stents — wire mesh inserted to hold artery open. Statins — drugs that reduce blood cholesterol, slowing fatty deposits. Heart valve replacement — biological (from donors/animals) or mechanical. Heart transplant — for heart failure. Artificial hearts — temporary measure while waiting for transplant." },
+        ],
+        quiz: [
+          { q: "Why is the left ventricle wall thicker than the right?", a: "Because the left ventricle pumps blood all around the body (systemic circulation), which requires higher pressure, whereas the right ventricle only pumps blood to the nearby lungs.", options: ["It pumps blood to the lungs", "It pumps blood around the whole body, needing more pressure", "It receives blood from the body", "It contains more blood"], correct: 1 },
+          { q: "What is the function of haemoglobin?", a: "To bind to oxygen in the lungs and transport it to body tissues, where it releases the oxygen for respiration.", options: ["To fight infections", "To bind to and transport oxygen", "To clot blood", "To carry carbon dioxide"], correct: 1 },
+          { q: "Why are capillary walls only one cell thick?", a: "To allow efficient diffusion of substances (oxygen, glucose, CO₂, waste products) between the blood and surrounding tissues — a short diffusion distance.", options: ["To save materials", "To allow efficient diffusion — short diffusion distance", "Because they carry less blood", "To make them flexible"], correct: 1 },
+          { q: "What do stents do?", a: "They are wire mesh tubes inserted into narrowed coronary arteries to hold them open, restoring normal blood flow to the heart muscle.", options: ["Replace the whole artery", "Hold narrowed coronary arteries open", "Dissolve fatty deposits", "Act as artificial hearts"], correct: 1 },
+          { q: "What is the role of platelets?", a: "Platelets are cell fragments that help blood clot at wound sites, preventing blood loss and entry of pathogens.", options: ["Carry oxygen", "Help blood clot at wound sites", "Fight infections with antibodies", "Transport nutrients"], correct: 1 },
+        ],
+      },
+      {
+        id: "metabolism-exercise",
+        title: "Metabolism, Exercise & Health",
+        notes: [
+          { heading: "Aerobic Respiration", content: "Respiration is an exothermic reaction occurring continuously in all living cells. It transfers energy for all life processes: chemical reactions, movement, keeping warm. Aerobic respiration (uses oxygen): glucose + oxygen → carbon dioxide + water. Chemical equation: C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O. Transfers more energy than anaerobic respiration." },
+          { heading: "Anaerobic Respiration", content: "Without oxygen. In muscles: glucose → lactic acid. Incomplete oxidation = much less energy transferred. In plant/yeast cells: glucose → ethanol + carbon dioxide (fermentation — used in bread-making and brewing). During intense exercise: oxygen supply can't meet demand → anaerobic respiration occurs → lactic acid builds up → muscles fatigue. Oxygen debt: extra oxygen needed after exercise to break down lactic acid (which is transported to the liver and converted back to glucose)." },
+          { heading: "Response to Exercise", content: "During exercise: heart rate increases, breathing rate increases, breath volume increases — all to supply muscles with more oxygenated blood for increased respiration. If oxygen supply is insufficient → anaerobic respiration → lactic acid build-up → oxygen debt. Muscle fatigue = muscles stop contracting efficiently (one cause: lactic acid accumulation). After exercise, deep breathing continues to 'repay' the oxygen debt." },
+          { heading: "Metabolism", content: "Metabolism = the sum of all chemical reactions in a cell or the body. Includes: conversion of glucose to starch/glycogen/cellulose, formation of lipids (glycerol + 3 fatty acids), formation of amino acids (from glucose + nitrate ions) → proteins, respiration, breakdown of excess proteins to urea (for excretion)." },
+          { heading: "Health & Disease", content: "Health = state of physical and mental wellbeing. Diseases can be communicable (infectious) or non-communicable. They can interact: immune defects → more infections; viruses → can trigger cancer; pathogens → can trigger allergies; physical illness → depression. Risk factors for non-communicable diseases: diet, smoking, alcohol, exercise, obesity. Examples: smoking → lung cancer/disease; obesity → Type 2 diabetes; alcohol → liver disease/brain damage. Cancer: uncontrolled cell growth. Benign tumours stay in one place. Malignant tumours (cancers) invade other tissues and spread via the blood (secondary tumours/metastasis). Risk factors: smoking, obesity, UV exposure, certain viruses, genetic factors." },
+        ],
+        quiz: [
+          { q: "Write the word equation for aerobic respiration.", a: "glucose + oxygen → carbon dioxide + water", options: ["glucose → lactic acid", "glucose + oxygen → carbon dioxide + water", "glucose → ethanol + carbon dioxide", "carbon dioxide + water → glucose + oxygen"], correct: 1 },
+          { q: "What is oxygen debt?", a: "The volume of extra oxygen the body needs after exercise to react with the accumulated lactic acid and remove it from the cells. Lactic acid is transported to the liver and converted back to glucose.", options: ["The amount of oxygen used during exercise", "Extra oxygen needed after exercise to break down lactic acid", "The maximum oxygen your lungs can hold", "The oxygen stored in muscles"], correct: 1 },
+          { q: "What is the difference between benign and malignant tumours?", a: "Benign tumours stay in one area (usually within a membrane) and don't spread. Malignant tumours (cancers) invade neighbouring tissues and can spread via the blood to form secondary tumours elsewhere.", options: ["Benign are larger", "Benign stay in one area; malignant invade and spread", "Malignant are harmless", "There is no difference"], correct: 1 },
+          { q: "What is metabolism?", a: "The sum of all chemical reactions in a cell or the body — including respiration, synthesis of proteins/lipids/carbohydrates, and breakdown of excess proteins to urea.", options: ["Just respiration", "The sum of all chemical reactions in a cell or body", "Only the reactions that produce energy", "The rate at which you burn calories"], correct: 1 },
+          { q: "What is the word equation for anaerobic respiration in yeast?", a: "glucose → ethanol + carbon dioxide (this process is called fermentation)", options: ["glucose → lactic acid", "glucose + oxygen → carbon dioxide + water", "glucose → ethanol + carbon dioxide", "ethanol → glucose + oxygen"], correct: 2 },
+        ],
+      },
+      {
+        id: "cell-division",
+        title: "Cell Division & Reproduction",
+        notes: [
+          { heading: "Chromosomes & DNA", content: "Nucleus contains chromosomes made of DNA. Each chromosome carries many genes. In body cells, chromosomes are in pairs (23 pairs in humans = 46 total). DNA is a polymer — double helix of two strands. Made of repeating nucleotide units (sugar + phosphate + base). Four bases: A, C, G, T. Complementary base pairing: A-T, C-G. A gene = a section of DNA coding for a particular sequence of amino acids → a specific protein." },
+          { heading: "Mitosis", content: "Cell division for growth and repair. Before division: cell grows, DNA replicates, organelles increase. Then: chromosomes line up, copies separate to opposite ends, nucleus divides, cytoplasm divides → two identical daughter cells with full set of chromosomes. Important for growth, repair, and asexual reproduction. Produces genetically identical cells." },
+          { heading: "Meiosis", content: "Cell division for making gametes (sex cells). Cell divides TWICE → four genetically different cells, each with HALF the normal chromosome number (23 in humans). Meiosis introduces genetic variation because chromosomes are shuffled. At fertilisation, gametes fuse → full chromosome number restored (46). The new cell divides by mitosis to form an embryo." },
+          { heading: "Stem Cells", content: "Undifferentiated cells that can become many cell types. Embryonic stem cells can become any type of cell. Adult stem cells (e.g. bone marrow) can become several related types (e.g. blood cells). Plant meristems can differentiate throughout the plant's life. Potential treatments: diabetes, paralysis. Therapeutic cloning: creating an embryo with same genes as patient → stem cells won't be rejected. Risks: viral infection transfer. Ethical concerns about using embryos." },
+          { heading: "Sexual vs Asexual Reproduction", content: "Sexual: two parents, fusion of gametes (sperm + egg), meiosis, produces genetic variation → natural selection advantage. Asexual: one parent, no gametes, mitosis, produces clones (genetically identical). Some organisms use both: malarial parasites (asexual in humans, sexual in mosquitoes), fungi, many plants (seeds = sexual, runners/bulbs = asexual)." },
+        ],
+        quiz: [
+          { q: "How many cells are produced by meiosis, and are they identical or different?", a: "Four genetically different cells, each with half the normal number of chromosomes.", options: ["Two identical cells", "Four genetically different cells with half the chromosomes", "Two different cells", "Four identical cells"], correct: 1 },
+          { q: "What is the complementary base pair for adenine (A)?", a: "Thymine (T). The rule is A-T and C-G.", options: ["Cytosine", "Guanine", "Thymine", "Uracil"], correct: 2 },
+          { q: "What is the key difference between mitosis and meiosis?", a: "Mitosis produces 2 identical cells with the full chromosome number (for growth/repair). Meiosis produces 4 genetically different cells with half the chromosomes (for gametes).", options: ["Mitosis is faster", "Mitosis = 2 identical cells (full chromosomes); meiosis = 4 different cells (half chromosomes)", "Meiosis only happens in plants", "There is no difference"], correct: 1 },
+          { q: "What are stem cells?", a: "Undifferentiated cells that can divide and differentiate into many different specialised cell types.", options: ["Cells that have stopped dividing", "Undifferentiated cells that can become many cell types", "Only found in plants", "Red blood cells"], correct: 1 },
+          { q: "Give one advantage of sexual reproduction and one of asexual.", a: "Sexual: produces genetic variation (survival advantage if environment changes). Asexual: faster, only needs one parent, produces many identical offspring quickly when conditions are good.", options: ["Sexual = genetic variation; asexual = faster, only one parent needed", "Sexual = faster; asexual = more variation", "Sexual = clones; asexual = variation", "Both are identical in advantages"], correct: 0 },
+        ],
+      },
+      {
+        id: "genetics",
+        title: "Genes & Inheritance",
+        notes: [
+          { heading: "Key Terms", content: "Gene: section of DNA coding for a protein. Allele: different versions of a gene. Dominant allele: always expressed, even if only one copy present (shown with capital letter, e.g. D). Recessive allele: only expressed if two copies present / no dominant allele (shown with lowercase, e.g. d). Homozygous: two identical alleles (DD or dd). Heterozygous: two different alleles (Dd). Genotype: the alleles an organism has (e.g. Dd). Phenotype: the physical characteristic expressed (e.g. has polydactyly)." },
+          { heading: "Genetic Crosses & Punnett Squares", content: "Use Punnett squares to predict offspring genotypes and phenotypes. Example: Dd × dd → offspring are Dd, Dd, dd, dd = 50% chance of dominant phenotype, 50% recessive. Polydactyly: caused by dominant allele (D). Cystic fibrosis: caused by recessive allele (f) — both parents must be carriers (Ff) or affected (ff). Sex determination: XX = female, XY = male. A Punnett square shows 50:50 chance of boy or girl." },
+          { heading: "The Genome", content: "Genome = entire genetic material of an organism. The Human Genome Project mapped all human DNA. Importance: finding genes linked to diseases, understanding inherited disorders, tracing human migration patterns. Most characteristics are controlled by multiple genes interacting (not single genes). Mutations: changes in DNA sequence. Most have no effect. Some alter protein shape → can affect function (e.g. enzyme no longer fits substrate). Non-coding DNA can switch genes on/off." },
+          { heading: "Inherited Disorders", content: "Polydactyly (extra fingers/toes): dominant allele — only one copy needed. Cystic fibrosis (thick mucus in lungs/digestive system): recessive allele — must inherit two copies (one from each parent). Carriers (Ff) don't show symptoms but can pass the allele on. Embryo screening can detect these conditions — raises ethical issues about selection." },
+        ],
+        quiz: [
+          { q: "What is the difference between homozygous and heterozygous?", a: "Homozygous = two identical alleles (e.g. DD or dd). Heterozygous = two different alleles (e.g. Dd).", options: ["Homozygous = one allele; heterozygous = two alleles", "Homozygous = identical alleles; heterozygous = different alleles", "They mean the same thing", "Homozygous = dominant; heterozygous = recessive"], correct: 1 },
+          { q: "Two parents are both carriers of cystic fibrosis (Ff × Ff). What is the probability their child will have CF?", a: "25% (1 in 4). Punnett square gives: FF, Ff, Ff, ff — only ff has the condition.", options: ["0%", "25%", "50%", "75%"], correct: 1 },
+          { q: "Why is cystic fibrosis a recessive disorder?", a: "Because the allele that causes it is recessive — you need two copies (ff) to have the condition. Carriers (Ff) have one copy but don't show symptoms because the dominant allele masks it.", options: ["Because it's very common", "You need two recessive alleles (ff) to have the condition", "Because it only affects males", "Because it skips generations always"], correct: 1 },
+          { q: "What determines whether a baby is male or female?", a: "The sex chromosomes: XX = female, XY = male. The father's sperm determines the sex (either X or Y), since the mother always contributes X.", options: ["The mother's genes only", "XX = female, XY = male — determined by father's sperm", "Random chance unrelated to chromosomes", "The number of chromosomes"], correct: 1 },
+          { q: "What is the difference between genotype and phenotype?", a: "Genotype = the alleles an organism has (e.g. Bb). Phenotype = the physical characteristic that is expressed (e.g. brown eyes).", options: ["They are the same thing", "Genotype = alleles; phenotype = physical characteristic expressed", "Genotype = appearance; phenotype = alleles", "Phenotype is inherited; genotype is not"], correct: 1 },
+        ],
+      },
+      {
+        id: "ecology",
+        title: "Habitats & Sampling",
+        notes: [
+          { heading: "Ecosystems & Communities", content: "Ecosystem = interaction of living organisms (biotic) with non-living environment (abiotic). Community = all organisms in an ecosystem. Population = all organisms of one species in an area. Interdependence: species depend on each other for food, shelter, pollination, seed dispersal. If one species is removed, the whole community can be affected. Stable community: all factors in balance, population sizes fairly constant (e.g. tropical rainforest, ancient oak woodland)." },
+          { heading: "Competition", content: "Plants compete for: light, space, water, mineral ions. Animals compete for: food, mates, territory. Intraspecific competition (within species) is often more intense than interspecific (between species) because individuals need exactly the same resources." },
+          { heading: "Abiotic & Biotic Factors", content: "Abiotic factors: light intensity, temperature, moisture, soil pH, mineral content, wind, CO₂ levels (plants), O₂ levels (aquatic animals). Biotic factors: food availability, new predators, new pathogens, competition from other species (e.g. grey squirrels outcompeting red squirrels in UK). Changes in these factors affect community distribution and population sizes." },
+          { heading: "Adaptations", content: "Structural: physical features (e.g. thick fur, large ears for cooling). Behavioural: actions (e.g. migration, nocturnal activity). Functional: internal processes (e.g. producing venom, antifreeze proteins). Extremophiles: organisms adapted to extreme conditions (high temperature, pressure, salt concentration). Example: bacteria in deep-sea vents." },
+          { heading: "Food Chains & Sampling", content: "Producer → primary consumer → secondary consumer → tertiary consumer. Producers are photosynthetic organisms. Predator-prey cycles: predator numbers follow prey numbers with a time lag. Sampling: use quadrats and transects. Quadrat placed randomly (using random number generator for coordinates). Count organisms in quadrat → calculate mean → estimate total population. Required practical: measure population size of a common species using sampling techniques." },
+        ],
+        quiz: [
+          { q: "What is the difference between abiotic and biotic factors?", a: "Abiotic = non-living factors (temperature, light, moisture, pH, etc.). Biotic = living factors (predators, food availability, disease, competition).", options: ["Abiotic = living; biotic = non-living", "Abiotic = non-living; biotic = living", "They are the same thing", "Abiotic = animals; biotic = plants"], correct: 1 },
+          { q: "What is interdependence?", a: "When species in a community depend on each other — for food, shelter, pollination, seed dispersal, etc. Removing one species can affect the whole community.", options: ["When species ignore each other", "When species depend on each other for survival needs", "When species compete for territory", "When one species eats another"], correct: 1 },
+          { q: "Why should quadrats be placed randomly?", a: "To avoid sampling bias — if you choose where to place them, you might unconsciously select areas with more/fewer organisms, giving unrepresentative results.", options: ["To save time", "To avoid sampling bias and get representative results", "Because the teacher said so", "Random placement is easier"], correct: 1 },
+          { q: "In a predator-prey graph, what happens to predator numbers after prey numbers increase?", a: "Predator numbers increase after a time lag — more food available means more predators can survive and reproduce. Then prey numbers drop (more being eaten), followed by predator numbers dropping (less food).", options: ["Predators decrease immediately", "Predators increase after a time lag", "Predator numbers don't change", "Predators and prey increase together always"], correct: 1 },
+          { q: "What is an extremophile? Give an example.", a: "An organism adapted to live in extreme conditions (very high temperature, pressure, or salt concentration). Example: bacteria living in deep-sea hydrothermal vents.", options: ["A plant in a garden", "An organism adapted to extreme conditions, e.g. deep-sea vent bacteria", "Any animal that hibernates", "A type of fungus"], correct: 1 },
+        ],
+      },
+    ],
+  },
+  electronics: {
+    name: "Electronics",
+    board: "Eduqas",
+    icon: "🔌",
+    color: "#264653",
+    examDate: "Tue 5 May – 9am",
+    topics: [
+      {
+        id: "elec-circuits",
+        title: "Circuit Theory & Components",
+        notes: [
+          { heading: "Basic Circuit Concepts", content: "Current (I) = flow of charge, measured in amps (A). Potential difference / Voltage (V) = energy transferred per unit charge, measured in volts (V). Resistance (R) = opposition to current flow, measured in ohms (Ω). Ohm's Law: V = IR. Power: P = IV = I²R = V²/R. Energy: E = Pt = IVt. All circuits need a complete loop and an energy source (e.g. battery, power supply)." },
+          { heading: "Resistors", content: "Fixed resistors: have a set resistance value. Colour code bands indicate resistance value. Variable resistors (potentiometers): resistance can be adjusted — used as a voltage divider to give a variable output voltage. Resistors in series: R_total = R₁ + R₂ + R₃. Resistors in parallel: 1/R_total = 1/R₁ + 1/R₂. A voltage divider uses two resistors to split the supply voltage into a smaller output voltage: V_out = V_in × R₂/(R₁ + R₂)." },
+          { heading: "Input Transducers (Sensors)", content: "Transducers convert one form of energy to another. Input transducers (sensors) convert physical quantities into electrical signals. LDR (Light Dependent Resistor): resistance decreases as light increases. Thermistor (NTC): resistance decreases as temperature increases. Microphone: converts sound waves into electrical signals. Switch: provides on/off input. These are used in voltage divider circuits to produce a varying voltage that represents the physical quantity being measured." },
+          { heading: "Output Transducers", content: "Convert electrical signals into other energy forms. LED (Light Emitting Diode): emits light when forward biased — needs a current-limiting resistor (R = (V_supply - V_LED) / I_LED). Typical LED: ~2V forward voltage, ~20mA current. Buzzer/sounder: converts electrical energy to sound. Motor: converts electrical energy to kinetic energy. Relay: an electromagnetically operated switch — allows a small current to control a larger one (electrical isolation between circuits)." },
+          { heading: "Capacitors", content: "Store electrical charge/energy. Capacitance measured in farads (F) — usually µF or nF. Capacitors charge up when connected to a voltage source and discharge through a resistor. Charging: voltage across capacitor increases, current decreases. Discharging: voltage and current both decrease. Time constant τ = RC (resistance × capacitance) — the time to charge to ~63% or discharge to ~37%. Used in timing circuits and filters." },
+          { heading: "Diodes & Transistors", content: "Diode: allows current in one direction only (forward biased). Has ~0.7V drop across it (silicon). Used for rectification and protection. Transistor (NPN BJT): acts as an electronic switch or amplifier. Three terminals: Base (B), Collector (C), Emitter (E). A small base current switches on a larger collector-emitter current. Transistor as a switch: when base voltage exceeds ~0.7V, transistor turns on → current flows collector to emitter → output device operates. A base resistor limits the base current." },
+        ],
+        quiz: [
+          { q: "In a voltage divider with R₁ = 3kΩ on top and R₂ = 1kΩ on the bottom, with a 12V supply, what is V_out?", a: "V_out = 12 × 1000/(3000+1000) = 12 × 1/4 = 3V", options: ["9V", "6V", "3V", "4V"], correct: 2 },
+          { q: "How does the resistance of an LDR change when light intensity increases?", a: "The resistance decreases — more light means lower resistance.", options: ["Increases", "Decreases", "Stays the same", "Becomes infinite"], correct: 1 },
+          { q: "What is the time constant of a 100µF capacitor with a 10kΩ resistor?", a: "τ = RC = 10,000 × 0.0001 = 1 second", options: ["0.01s", "0.1s", "1s", "10s"], correct: 2 },
+          { q: "An LED has a forward voltage of 2V and needs 20mA. The supply is 9V. What resistor is needed?", a: "R = (9-2)/0.02 = 7/0.02 = 350Ω", options: ["100Ω", "350Ω", "450Ω", "700Ω"], correct: 1 },
+          { q: "What are the three terminals of an NPN transistor?", a: "Base (B), Collector (C), Emitter (E). A small base current controls a larger collector-emitter current.", options: ["Anode, Cathode, Gate", "Base, Collector, Emitter", "Input, Output, Ground", "Positive, Negative, Earth"], correct: 1 },
+          { q: "What does a relay do in a circuit?", a: "It uses a small current through an electromagnet to switch on/off a separate circuit carrying a larger current — providing electrical isolation between the control and output circuits.", options: ["Amplifies voltage", "Uses small current to switch a larger current circuit", "Stores charge", "Converts light to electricity"], correct: 1 },
+          { q: "What is the formula for total resistance of two resistors in parallel?", a: "1/R_total = 1/R₁ + 1/R₂", options: ["R_total = R₁ + R₂", "1/R_total = 1/R₁ + 1/R₂", "R_total = R₁ × R₂", "R_total = (R₁ - R₂)/2"], correct: 1 },
+        ],
+      },
+      {
+        id: "elec-logic",
+        title: "Logic Gates & Digital Systems",
+        notes: [
+          { heading: "Logic Gates", content: "Logic gates process binary signals (HIGH/1 or LOW/0). NOT gate: output is the inverse of input (1→0, 0→1). Written as Q = NOT A or Q = Ā. AND gate: output HIGH only when ALL inputs are HIGH. Q = A AND B. OR gate: output HIGH when ANY input is HIGH. Q = A OR B. NAND gate: NOT + AND — output LOW only when all inputs HIGH (opposite of AND). NOR gate: NOT + OR — output LOW when any input is HIGH (opposite of OR). You must be able to draw the symbols, write truth tables, and write Boolean expressions for all of these." },
+          { heading: "Truth Tables", content: "A truth table lists all possible input combinations and the resulting output. For 2 inputs (A, B): 4 rows (00, 01, 10, 11). For 3 inputs: 8 rows. AND: only 1,1 gives 1. OR: only 0,0 gives 0. NAND: only 1,1 gives 0. NOR: only 0,0 gives 1. NOT: 0→1, 1→0. You may need to complete truth tables for combined logic circuits — work through gate by gate." },
+          { heading: "Combining Logic Gates", content: "Complex logic functions are built by connecting gates together. To analyse: trace signals through each gate in order, writing intermediate outputs. To design: start from the required truth table, identify the Boolean expression, then build the circuit. NAND gates are 'universal' — any logic function can be built using only NAND gates. Same for NOR gates." },
+          { heading: "Binary & Number Systems", content: "Binary uses only 0 and 1 (base 2). Each column is a power of 2: ...16, 8, 4, 2, 1. Converting binary to decimal: add the values of columns with a 1. E.g. 1101 = 8+4+0+1 = 13. Converting decimal to binary: repeatedly divide by 2, read remainders bottom to top. BCD (Binary Coded Decimal): each decimal digit is represented by its own 4-bit binary code. E.g. 25 in BCD = 0010 0101." },
+          { heading: "Timing Circuits (555 Timer & Bistables)", content: "555 timer IC: can be used in monostable mode (one pulse of set duration when triggered) or astable mode (continuous square wave output — oscillator). Monostable: produces a single timed output pulse. Duration depends on R and C values. Astable: produces a continuous oscillating output. Frequency depends on R and C values. Bistable (flip-flop): has two stable states — stays in each state until triggered to switch. D-type flip-flop: output copies input (D) when triggered by clock pulse. Used as a latch (memory) to store one bit of data." },
+        ],
+        quiz: [
+          { q: "What is the output of an AND gate when inputs are A=1, B=0?", a: "0 — an AND gate only outputs 1 when ALL inputs are 1.", options: ["1", "0", "Depends on the gate", "Undefined"], correct: 1 },
+          { q: "Convert binary 10110 to decimal.", a: "16 + 0 + 4 + 2 + 0 = 22", options: ["22", "26", "18", "10110"], correct: 0 },
+          { q: "What is the Boolean expression for a NAND gate?", a: "Q = NOT(A AND B), often written as Q = (A·B)̄ with an overbar. The output is the opposite of AND — LOW only when both inputs are HIGH.", options: ["Q = A AND B", "Q = A OR B", "Q = NOT(A AND B)", "Q = NOT(A OR B)"], correct: 2 },
+          { q: "A NOR gate has inputs A=0, B=0. What is the output?", a: "1 — NOR outputs HIGH only when ALL inputs are LOW.", options: ["0", "1", "Undefined", "It depends"], correct: 1 },
+          { q: "What is the difference between monostable and astable modes of a 555 timer?", a: "Monostable produces a single timed output pulse when triggered. Astable produces a continuous oscillating square wave output (no trigger needed after start).", options: ["They are the same", "Monostable = single pulse; astable = continuous oscillation", "Monostable = continuous; astable = single pulse", "Neither produces a pulse"], correct: 1 },
+          { q: "Convert decimal 37 to BCD (Binary Coded Decimal).", a: "3 = 0011, 7 = 0111, so 37 in BCD = 0011 0111", options: ["100101", "0011 0111", "0100 1001", "1001 0111"], correct: 1 },
+        ],
+      },
+    ],
+  },
+};
+
+// ─── Components ──────────────────────────────────────────────────────────────
+
+const fonts = `
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,800;1,9..144,400&display=swap');
+`;
+
+function CountdownBanner() {
+  const [now, setNow] = useState(new Date());
+  useEffect(() => { const t = setInterval(() => setNow(new Date()), 60000); return () => clearInterval(t); }, []);
+  const examStart = new Date(2026, 3, 27, 9, 0, 0); // April 27, 2026 9am
+  const diff = examStart - now;
+  const days = Math.max(0, Math.floor(diff / 86400000));
+  const hours = Math.max(0, Math.floor((diff % 86400000) / 3600000));
+  return (
+    <div style={{ background: "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)", color: "#fff", padding: "14px 24px", textAlign: "center", fontFamily: "'Fraunces', serif", fontSize: 15, letterSpacing: "0.02em", borderBottom: "3px solid #e94560" }}>
+      <span style={{ opacity: 0.7 }}>First exam in</span>{" "}
+      <span style={{ fontWeight: 800, fontSize: 20, color: "#e94560" }}>{days}d {hours}h</span>{" "}
+      <span style={{ opacity: 0.7 }}>— Music, Mon 27 April</span>
+    </div>
+  );
+}
+
+function SubjectCard({ id, subject, isActive, onClick, darkMode }) {
+  return (
+    <button
+      onClick={onClick}
+      style={{
+        background: isActive ? subject.color : "var(--subject-inactive-bg)",
+        color: isActive ? "#fff" : "var(--text-secondary)",
+        border: isActive ? "none" : "1px solid var(--subject-inactive-border)",
+        borderRadius: 12,
+        padding: "12px 10px",
+        cursor: "pointer",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: 4,
+        minWidth: 80,
+        transition: "all 0.2s ease",
+        fontFamily: "'DM Sans', sans-serif",
+        flexShrink: 0,
+      }}
+    >
+      <span style={{ fontSize: 22 }}>{subject.icon}</span>
+      <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.03em" }}>{subject.name}</span>
+      <span style={{ fontSize: 9, opacity: 0.7 }}>{subject.board}</span>
+    </button>
+  );
+}
+
+function TopicSidebar({ topics, activeTopicId, onSelect }) {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 4, minWidth: 220 }}>
+      {topics.map((t) => (
+        <button
+          key={t.id}
+          onClick={() => onSelect(t.id)}
+          style={{
+            background: activeTopicId === t.id ? "var(--sidebar-active)" : "transparent",
+            border: "none",
+            borderLeft: activeTopicId === t.id ? "3px solid var(--accent)" : "3px solid transparent",
+            color: "var(--text-primary)",
+            padding: "10px 14px",
+            textAlign: "left",
+            cursor: "pointer",
+            fontFamily: "'DM Sans', sans-serif",
+            fontSize: 13,
+            fontWeight: activeTopicId === t.id ? 600 : 400,
+            borderRadius: "0 8px 8px 0",
+            transition: "all 0.15s ease",
+            lineHeight: 1.3,
+          }}
+        >
+          {t.title}
+          {t.quiz && t.quiz.length > 0 && (
+            <span style={{ display: "block", fontSize: 10, opacity: 0.5, marginTop: 2 }}>
+              {t.quiz.length} quiz questions
+            </span>
+          )}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function NotesView({ topic }) {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+      <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: 22, fontWeight: 700, color: "var(--text-primary)", margin: 0, lineHeight: 1.3 }}>
+        {topic.title}
+      </h2>
+      {topic.notes.map((note, i) => (
+        <div key={i} style={{ background: "var(--card-bg)", borderRadius: 12, padding: "18px 20px", border: "1px solid var(--card-border)" }}>
+          <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, fontWeight: 700, color: "var(--accent)", margin: "0 0 8px 0", textTransform: "uppercase", letterSpacing: "0.05em" }}>
+            {note.heading}
+          </h3>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, lineHeight: 1.7, color: "var(--text-secondary)", margin: 0, whiteSpace: "pre-wrap" }}>
+            {note.content}
+          </p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function QuizView({ topic, subjectColor }) {
+  const [current, setCurrent] = useState(0);
+  const [selected, setSelected] = useState(null);
+  const [score, setScore] = useState(0);
+  const [answered, setAnswered] = useState(0);
+  const [showAnswer, setShowAnswer] = useState(false);
+  const [finished, setFinished] = useState(false);
+  const [wrongOnes, setWrongOnes] = useState([]);
+
+  const questions = topic.quiz;
+  if (!questions || questions.length === 0) {
+    return <p style={{ color: "var(--text-secondary)", fontFamily: "'DM Sans', sans-serif" }}>No quiz questions available for this topic yet.</p>;
+  }
+
+  const q = questions[current];
+  const correctIdx = q.correct !== undefined ? q.correct : 0; // All questions should have explicit correct index
+
+  const handleSelect = (idx) => {
+    if (showAnswer) return;
+    setSelected(idx);
+    setShowAnswer(true);
+    setAnswered((a) => a + 1);
+    if (idx === correctIdx) {
+      setScore((s) => s + 1);
+    } else {
+      setWrongOnes((w) => [...w, current]);
+    }
+  };
+
+  const handleNext = () => {
+    if (current < questions.length - 1) {
+      setCurrent((c) => c + 1);
+      setSelected(null);
+      setShowAnswer(false);
+    } else {
+      setFinished(true);
+    }
+  };
+
+  const handleRestart = () => {
+    setCurrent(0);
+    setSelected(null);
+    setScore(0);
+    setAnswered(0);
+    setShowAnswer(false);
+    setFinished(false);
+    setWrongOnes([]);
+  };
+
+  if (finished) {
+    const pct = Math.round((score / questions.length) * 100);
+    return (
+      <div style={{ textAlign: "center", padding: "40px 20px" }}>
+        <div style={{ fontSize: 48, marginBottom: 12 }}>{pct >= 80 ? "🌟" : pct >= 60 ? "👍" : "📚"}</div>
+        <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: 28, color: "var(--text-primary)", margin: "0 0 8px 0" }}>
+          {score} / {questions.length}
+        </h2>
+        <p style={{ color: "var(--text-secondary)", fontFamily: "'DM Sans', sans-serif", fontSize: 14, marginBottom: 24 }}>
+          {pct >= 80 ? "Excellent! You really know this material." : pct >= 60 ? "Good effort — review the ones you missed." : "Worth going over the notes again before retrying."}
+        </p>
+        {wrongOnes.length > 0 && (
+          <div style={{ textAlign: "left", background: "var(--card-bg)", borderRadius: 12, padding: 20, marginBottom: 20, border: "1px solid var(--card-border)" }}>
+            <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, fontWeight: 700, color: "#e94560", margin: "0 0 12px 0" }}>REVIEW THESE:</h3>
+            {wrongOnes.map((idx) => (
+              <div key={idx} style={{ marginBottom: 12, paddingBottom: 12, borderBottom: "1px solid var(--card-border)" }}>
+                <p style={{ fontSize: 13, color: "var(--text-primary)", margin: "0 0 4px 0", fontWeight: 500, fontFamily: "'DM Sans', sans-serif" }}>{questions[idx].q}</p>
+                <p style={{ fontSize: 12, color: "#52b788", margin: 0, fontFamily: "'DM Sans', sans-serif" }}>✓ {questions[idx].a}</p>
+              </div>
+            ))}
+          </div>
+        )}
+        <button onClick={handleRestart} style={{ background: subjectColor, color: "#fff", border: "none", borderRadius: 10, padding: "12px 32px", cursor: "pointer", fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: 14 }}>
+          Try Again
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+        <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12, color: "var(--text-secondary)" }}>
+          {current + 1} / {questions.length}
+        </span>
+        <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12, color: "#52b788" }}>
+          Score: {score}
+        </span>
+      </div>
+      <div style={{ background: "var(--card-bg)", borderRadius: 12, width: "100%", height: 4, marginBottom: 20, overflow: "hidden" }}>
+        <div style={{ background: subjectColor, height: "100%", width: `${((current + 1) / questions.length) * 100}%`, borderRadius: 4, transition: "width 0.3s ease" }} />
+      </div>
+      <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, fontWeight: 600, color: "var(--text-primary)", margin: "0 0 20px 0", lineHeight: 1.5 }}>
+        {q.q}
+      </h3>
+      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+        {q.options.map((opt, idx) => {
+          let bg = "var(--option-bg)";
+          let border = "1px solid var(--option-border)";
+          let col = "var(--text-primary)";
+          if (showAnswer) {
+            if (idx === correctIdx) { bg = "rgba(82,183,136,0.15)"; border = "1px solid #52b788"; col = "#52b788"; }
+            else if (idx === selected) { bg = "rgba(233,69,96,0.15)"; border = "1px solid #e94560"; col = "#e94560"; }
+          } else if (idx === selected) { bg = "var(--card-hover)"; border = `1px solid ${subjectColor}`; }
+          return (
+            <button
+              key={idx}
+              onClick={() => handleSelect(idx)}
+              style={{ background: bg, border, color: col, borderRadius: 10, padding: "14px 16px", cursor: showAnswer ? "default" : "pointer", fontFamily: "'DM Sans', sans-serif", fontSize: 14, textAlign: "left", transition: "all 0.15s ease", lineHeight: 1.4 }}
+            >
+              <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, opacity: 0.5, marginRight: 10 }}>
+                {String.fromCharCode(65 + idx)}
+              </span>
+              {opt}
+            </button>
+          );
+        })}
+      </div>
+      {showAnswer && (
+        <div style={{ marginTop: 16 }}>
+          <div style={{ background: "var(--card-bg)", borderRadius: 10, padding: "14px 16px", marginBottom: 16, borderLeft: `3px solid ${selected === correctIdx ? "#52b788" : "#e94560"}` }}>
+            <p style={{ fontSize: 12, fontWeight: 600, color: selected === correctIdx ? "#52b788" : "#e94560", margin: "0 0 4px 0", fontFamily: "'DM Sans', sans-serif" }}>
+              {selected === correctIdx ? "✓ Correct!" : "✗ Not quite"}
+            </p>
+            <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0, fontFamily: "'DM Sans', sans-serif", lineHeight: 1.5 }}>
+              {q.a}
+            </p>
+          </div>
+          <button
+            onClick={handleNext}
+            style={{ background: subjectColor, color: "#fff", border: "none", borderRadius: 10, padding: "12px 28px", cursor: "pointer", fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: 14, width: "100%" }}
+          >
+            {current < questions.length - 1 ? "Next Question →" : "See Results"}
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ExamTimetable() {
+  return (
+    <div style={{ maxWidth: 600 }}>
+      <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: 22, fontWeight: 700, color: "var(--text-primary)", margin: "0 0 16px 0" }}>Exam Timetable</h2>
+      <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        {EXAM_SCHEDULE.map((e, i) => (
+          <div key={i} style={{ display: "grid", gridTemplateColumns: "120px 1fr 80px", gap: 12, alignItems: "center", padding: "10px 14px", background: i % 2 === 0 ? "var(--card-bg)" : "transparent", borderRadius: 8 }}>
+            <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12, color: "var(--text-secondary)" }}>{e.date}</span>
+            <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, fontWeight: 500, color: "var(--text-primary)" }}>{e.subject}</span>
+            <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12, color: "var(--text-secondary)", textAlign: "right" }}>{e.time}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function Dashboard({ onSubjectClick }) {
+  const subjectEntries = Object.entries(SUBJECTS);
+  return (
+    <div style={{ maxWidth: 700 }}>
+      <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: 26, fontWeight: 800, color: "var(--text-primary)", margin: "0 0 6px 0" }}>
+        Ivon's Revision Hub
+      </h2>
+      <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: "var(--text-secondary)", margin: "0 0 28px 0" }}>
+        GCSE Year 10 End-of-Year Exams — Sutton Grammar School
+      </p>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: 12, marginBottom: 32 }}>
+        {subjectEntries.map(([id, s]) => {
+          const topicCount = s.topics.filter(t => t.id !== "placeholder").length;
+          const quizCount = s.topics.reduce((sum, t) => sum + (t.quiz ? t.quiz.length : 0), 0);
+          return (
+            <button
+              key={id}
+              onClick={() => onSubjectClick(id)}
+              style={{
+                background: `linear-gradient(135deg, ${s.color}22, ${s.color}11)`,
+                border: `1px solid ${s.color}33`,
+                borderRadius: 14,
+                padding: "20px 18px",
+                cursor: "pointer",
+                textAlign: "left",
+                transition: "all 0.2s ease",
+              }}
+            >
+              <div style={{ fontSize: 28, marginBottom: 8 }}>{s.icon}</div>
+              <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, fontWeight: 700, color: "var(--text-primary)", marginBottom: 2 }}>{s.name}</div>
+              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: s.color }}>{s.board}</div>
+              <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, color: "var(--text-secondary)", marginTop: 8 }}>
+                {topicCount > 0 ? `${topicCount} topic${topicCount > 1 ? "s" : ""} · ${quizCount} questions` : "Coming soon"}
+              </div>
+              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, color: "var(--text-secondary)", marginTop: 4, opacity: 0.7 }}>
+                {s.examDate}
+              </div>
+            </button>
+          );
+        })}
+      </div>
+      <ExamTimetable />
+    </div>
+  );
+}
+
+// ─── App ─────────────────────────────────────────────────────────────────────
+
+function App() {
+  const [activeSubject, setActiveSubject] = useState(null);
+  const [activeTopic, setActiveTopic] = useState(null);
+  const [mode, setMode] = useState("notes"); // "notes" | "quiz"
+
+  const subject = activeSubject ? SUBJECTS[activeSubject] : null;
+  const topic = subject && activeTopic ? subject.topics.find((t) => t.id === activeTopic) : null;
+  const [darkMode, setDarkMode] = useState(true);
+
+  useEffect(() => {
+    if (subject && subject.topics.length > 0) {
+      setActiveTopic(subject.topics[0].id);
+      setMode("notes");
+    }
+  }, [activeSubject]);
+
+  const handleBack = () => { setActiveSubject(null); setActiveTopic(null); setMode("notes"); };
+
+  const dark = {
+    "--text-primary": "#e8e6e3",
+    "--text-secondary": "#a09b96",
+    "--bg": "#0d0d0f",
+    "--surface": "#141416",
+    "--card-bg": "rgba(255,255,255,0.04)",
+    "--card-border": "rgba(255,255,255,0.06)",
+    "--card-hover": "rgba(255,255,255,0.06)",
+    "--option-bg": "rgba(255,255,255,0.06)",
+    "--option-border": "rgba(255,255,255,0.08)",
+    "--bar-bg": "rgba(255,255,255,0.06)",
+    "--bar-border": "rgba(255,255,255,0.06)",
+    "--sidebar-active": "rgba(255,255,255,0.12)",
+    "--toggle-bg": "rgba(255,255,255,0.04)",
+    "--subject-inactive-bg": "rgba(255,255,255,0.06)",
+    "--subject-inactive-border": "rgba(255,255,255,0.1)",
+    "--home-bg": "rgba(255,255,255,0.04)",
+    "--home-border": "rgba(255,255,255,0.08)",
+    "--home-active": "rgba(255,255,255,0.12)",
+  };
+  const light = {
+    "--text-primary": "#1a1a1a",
+    "--text-secondary": "#555555",
+    "--bg": "#f5f5f0",
+    "--surface": "#ffffff",
+    "--card-bg": "rgba(0,0,0,0.03)",
+    "--card-border": "rgba(0,0,0,0.08)",
+    "--card-hover": "rgba(0,0,0,0.05)",
+    "--option-bg": "rgba(0,0,0,0.04)",
+    "--option-border": "rgba(0,0,0,0.1)",
+    "--bar-bg": "rgba(0,0,0,0.04)",
+    "--bar-border": "rgba(0,0,0,0.08)",
+    "--sidebar-active": "rgba(0,0,0,0.06)",
+    "--toggle-bg": "rgba(0,0,0,0.05)",
+    "--subject-inactive-bg": "rgba(0,0,0,0.04)",
+    "--subject-inactive-border": "rgba(0,0,0,0.1)",
+    "--home-bg": "rgba(0,0,0,0.04)",
+    "--home-border": "rgba(0,0,0,0.1)",
+    "--home-active": "rgba(0,0,0,0.08)",
+  };
+  const theme = darkMode ? dark : light;
+
+  return (
+    <div style={{
+      ...theme,
+      "--accent": subject ? subject.color : "#e94560",
+      minHeight: "100vh",
+      background: "var(--bg)",
+      fontFamily: "'DM Sans', sans-serif",
+      transition: "background 0.3s ease, color 0.3s ease",
+    }}>
+      <style>{fonts}</style>
+      <CountdownBanner />
+      
+      {/* Subject selector bar */}
+      <div style={{ borderBottom: "1px solid var(--bar-border)", padding: "12px 20px", overflowX: "auto", display: "flex", gap: 8 }}>
+        <button
+          onClick={handleBack}
+          style={{
+            background: !activeSubject ? "var(--home-active)" : "var(--home-bg)",
+            color: "var(--text-secondary)",
+            border: "1px solid var(--home-border)",
+            borderRadius: 12,
+            padding: "12px 14px",
+            cursor: "pointer",
+            fontFamily: "'DM Sans', sans-serif",
+            fontSize: 11,
+            fontWeight: 600,
+            minWidth: 50,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexShrink: 0,
+          }}
+        >
+          🏠
+        </button>
+        {Object.entries(SUBJECTS).map(([id, s]) => (
+          <SubjectCard key={id} id={id} subject={s} isActive={activeSubject === id} onClick={() => setActiveSubject(id)} darkMode={darkMode} />
+        ))}
+        <button
+          onClick={() => setDarkMode(!darkMode)}
+          style={{
+            background: "var(--home-bg)",
+            color: "var(--text-secondary)",
+            border: "1px solid var(--home-border)",
+            borderRadius: 12,
+            padding: "12px 14px",
+            cursor: "pointer",
+            fontFamily: "'DM Sans', sans-serif",
+            fontSize: 16,
+            minWidth: 50,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexShrink: 0,
+            marginLeft: "auto",
+          }}
+          title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+        >
+          {darkMode ? "☀️" : "🌙"}
+        </button>
+      </div>
+
+      {/* Main content */}
+      <div style={{ padding: "24px 20px", maxWidth: 1100, margin: "0 auto" }}>
+        {!activeSubject ? (
+          <Dashboard onSubjectClick={setActiveSubject} />
+        ) : (
+          <div style={{ display: "flex", gap: 24, alignItems: "flex-start", flexWrap: "wrap" }}>
+            {/* Topic sidebar */}
+            <div style={{ minWidth: 220, maxWidth: 260, flexShrink: 0 }}>
+              <button onClick={handleBack} style={{ background: "none", border: "none", color: "var(--text-secondary)", cursor: "pointer", fontFamily: "'DM Sans', sans-serif", fontSize: 13, padding: "4px 0", marginBottom: 12, display: "flex", alignItems: "center", gap: 6 }}>
+                ← All subjects
+              </button>
+              <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: 20, fontWeight: 700, color: subject.color, margin: "0 0 4px 0", display: "flex", alignItems: "center", gap: 8 }}>
+                <span>{subject.icon}</span> {subject.name}
+              </h2>
+              <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: "var(--text-secondary)", margin: "0 0 16px 0" }}>
+                {subject.board} · {subject.examDate}
+              </p>
+              <TopicSidebar topics={subject.topics} activeTopicId={activeTopic} onSelect={(id) => { setActiveTopic(id); setMode("notes"); }} />
+            </div>
+
+            {/* Content area */}
+            <div style={{ flex: 1, minWidth: 300 }}>
+              {topic && (
+                <>
+                  {/* Notes/Quiz toggle */}
+                  <div style={{ display: "flex", gap: 4, marginBottom: 20, background: "var(--toggle-bg)", borderRadius: 10, padding: 4, width: "fit-content" }}>
+                    {["notes", "quiz"].map((m) => (
+                      <button
+                        key={m}
+                        onClick={() => setMode(m)}
+                        style={{
+                          background: mode === m ? subject.color : "transparent",
+                          color: mode === m ? "#fff" : "var(--text-secondary)",
+                          border: "none",
+                          borderRadius: 8,
+                          padding: "8px 20px",
+                          cursor: "pointer",
+                          fontFamily: "'DM Sans', sans-serif",
+                          fontSize: 13,
+                          fontWeight: 600,
+                          transition: "all 0.15s ease",
+                          textTransform: "capitalize",
+                        }}
+                      >
+                        {m === "notes" ? "📝 Notes" : "❓ Quiz"}
+                      </button>
+                    ))}
+                  </div>
+                  {mode === "notes" ? <NotesView topic={topic} /> : <QuizView topic={topic} subjectColor={subject.color} />}
+                </>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(React.createElement(App));
+
+</script>
+</body>
+</html>
