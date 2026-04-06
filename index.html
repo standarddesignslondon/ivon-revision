@@ -19,9 +19,9 @@
 </head>
 <body>
 <div id="root"></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script type="text/babel">
 const { useState, useEffect, useCallback, useMemo } = React;
 
@@ -83,6 +83,58 @@ const SUBJECTS = {
         ],
       },
       {
+        id: "killer-queen",
+        title: "Set Work: Queen – 'Killer Queen'",
+        notes: [
+          { heading: "Context & Background", content: "Written by Freddie Mercury, released 1974 on the album 'Sheer Heart Attack'. It was Queen's first major UK hit, reaching No. 2. The song describes a sophisticated, high-class woman. Mercury was influenced by music hall, vaudeville, and British cabaret traditions. Queen were known for their elaborate studio production and multi-layered vocal harmonies." },
+          { heading: "Instrumentation & Timbre", content: "Vocals: Freddie Mercury's lead with extensive multi-tracked vocal harmonies (Queen's signature sound). Guitar: Brian May using a homemade 'Red Special' guitar, played with a sixpence coin instead of a plectrum for a distinctive bright tone. Also uses guitar harmonies and overdubs. Piano: jangly, honky-tonk style piano adds a music-hall character. Bass: John Deacon. Drums: Roger Taylor. No synthesisers — the album sleeve famously states 'no synthesisers' were used." },
+          { heading: "Structure", content: "Modified verse-chorus structure with variations: Intro → Verse 1 → Chorus → Verse 2 → Chorus → Guitar solo → Verse 3 → Chorus → Outro. The structure is not a straightforward pop form — sections vary in length and content, giving it an unpredictable, sophisticated feel. Brief instrumental interludes connect sections." },
+          { heading: "Melody & Vocals", content: "Mercury's vocal range is wide — he uses both chest voice and falsetto. Melodies are largely conjunct (stepwise) in the verses, becoming more disjunct (leaps) in the chorus. Extensive use of multi-tracked harmonies — voices layered to create a choir-like effect. Word painting: the melody reflects the lyrics (e.g. rising pitch on words suggesting luxury). Chromatic movement adds sophistication to the melodic lines." },
+          { heading: "Harmony & Tonality", content: "Key of E♭ major, but with frequent chromatic chords and unexpected harmonic shifts. Uses extended and altered chords that give a jazz-influenced sophistication. Chromatic harmony — notes outside the main key used freely. Circle-of-fifths progressions in places give the harmony a jazz feel. The harmony is richer and more complex than typical pop/rock of the era." },
+          { heading: "Rhythm, Tempo & Metre", content: "Time signature: 12/8 (compound quadruple — gives a swung/shuffle feel). Moderate tempo with a laid-back groove. Syncopation used extensively throughout — accents placed off the beat. Rhythmic variety between sections keeps the listener engaged. The shuffle feel gives the song a playful, swaying character." },
+          { heading: "Texture", content: "Texture varies throughout: verses are relatively thin (voice + accompaniment = homophonic). Choruses become much thicker with layered vocal harmonies — polyphonic/multi-layered. Guitar solo section: melody-dominated homophony. The build-up and stripping back of layers creates contrast between sections. The multi-tracked vocals are a key textural feature." },
+          { heading: "Key Exam Points", content: "Compare with 'Release': both use layering but in very different ways (Queen = studio overdubs for harmony; Afro Celt = layering for rhythmic/textural build). The 12/8 time signature and shuffle feel. The 'no synthesisers' approach — all sounds are acoustic/electric instruments and voices. Mercury's vocal technique and range. The music-hall/vaudeville influences that set Queen apart from other rock bands." },
+        ],
+        quiz: [
+          { q: "Who wrote 'Killer Queen' and when was it released?", options: ["Brian May, 1975", "Freddie Mercury, 1974", "Roger Taylor, 1973", "John Deacon, 1976"], correct: 1 },
+          { q: "What unusual item did Brian May use instead of a guitar plectrum?", options: ["A coin (sixpence)", "A credit card", "His thumb only", "A wooden stick"], correct: 0 },
+          { q: "What is the time signature of 'Killer Queen'?", options: ["4/4", "3/4", "6/8", "12/8"], correct: 3 },
+          { q: "What does 12/8 time give the song?", options: ["A march-like feel", "A waltz feel", "A swung/shuffle feel", "An irregular, unpredictable feel"], correct: 2 },
+          { q: "What famous statement appears on the 'Sheer Heart Attack' album sleeve?", options: ["'All instruments played live'", "'No synthesisers'", "'Recorded in one take'", "'No overdubs used'"], correct: 1 },
+          { q: "The multi-tracked vocal harmonies in 'Killer Queen' create:", options: ["A thin, sparse texture", "Dissonant clusters", "Rich layered harmonies (choir-like effect)", "Unison singing"], correct: 2 },
+          { q: "What musical traditions influenced the style of 'Killer Queen'?", options: ["Blues and country", "Music hall, vaudeville, and cabaret", "Classical symphony", "Punk and ska"], correct: 1 },
+          { q: "The harmony in 'Killer Queen' is best described as:", options: ["Simple three-chord pop", "Chromatic with jazz-influenced extended chords", "Atonal and dissonant", "Based on a 12-bar blues pattern"], correct: 1 },
+          { q: "How does the texture change between verse and chorus?", options: ["It stays the same throughout", "Verses are thinner (homophonic); choruses are thicker with layered harmonies", "Verses are thicker than choruses", "The texture is always polyphonic"], correct: 1 },
+          { q: "What is the overall structure of 'Killer Queen'?", options: ["Simple verse-chorus", "12-bar blues", "Modified verse-chorus with variations and guitar solo", "Through-composed with no repetition"], correct: 2 },
+        ],
+      },
+      {
+        id: "samba-em-preludio",
+        title: "Set Work: Esperanza Spalding – 'Samba Em Prelúdio'",
+        notes: [
+          { heading: "Context & Background", content: "Esperanza Spalding is an American jazz bassist, singer, and composer. 'Samba Em Prelúdio' is a cover of a piece originally composed by Baden Powell (guitar) and Vinicius de Moraes (lyrics) in 1962. It appears on Spalding's 2008 album 'Esperanza'. The original is a classic of Brazilian bossa nova music. Spalding's version maintains the Brazilian character while adding her own jazz sensibility." },
+          { heading: "Musical Tradition: Bossa Nova", content: "Bossa nova ('new trend') emerged in Brazil in the late 1950s/early 1960s. It fuses Brazilian samba rhythms with jazz harmony. Characteristics: gentle, understated rhythms (softer than traditional samba), sophisticated jazz-influenced chords (7ths, 9ths, extended chords), intimate vocal style (often soft and breathy), syncopated bass lines, nylon-string guitar as the central instrument in the original tradition. Key figures: João Gilberto, Antônio Carlos Jobim, Vinicius de Moraes." },
+          { heading: "Instrumentation & Timbre", content: "Spalding performs as both vocalist and bassist — a distinctive feature. Acoustic (upright/double) bass: warm, resonant tone; Spalding plays walking bass lines and melodic bass passages. Voice: Spalding sings in Portuguese (original lyrics by Vinicius de Moraes); her vocal style is intimate, warm, and jazz-inflected with occasional improvised embellishments. The stripped-back instrumentation creates an intimate chamber-music feel. Guitar or piano may accompany, depending on the arrangement." },
+          { heading: "Melody & Vocals", content: "The melody is lyrical and expressive, with a mix of conjunct (stepwise) and disjunct (leaping) movement. Spalding adds jazz-style vocal ornamentation — slides, scoops, and subtle improvised variations on repeated sections. The melody has a melancholic, reflective quality typical of bossa nova ballads. Sung in Portuguese, which adds to the authentic Brazilian character. Vocal phrasing is flexible and rubato-like, not rigidly following the beat." },
+          { heading: "Harmony & Tonality", content: "Rich jazz harmony with extended chords — 7ths, 9ths, and altered chords throughout. Frequent chromatic movement and unexpected chord changes. The tonality shifts between major and minor, creating an ambiguous, bittersweet mood. Harmonic rhythm is relatively slow (chords change at a moderate pace). The bass line outlines the harmony while also functioning as a melodic voice." },
+          { heading: "Rhythm & Metre", content: "Based on bossa nova rhythmic patterns — gentler and more understated than full samba. Syncopation is central — the rhythmic feel is laid-back with off-beat accents. The bass provides a steady rhythmic foundation while the vocal line floats above with flexible phrasing. Rubato passages — the tempo is not rigid, allowing expressive freedom. The gentle rhythmic character contrasts with the more driving rhythms of traditional samba." },
+          { heading: "Texture", content: "Predominantly homophonic — melody (voice) with accompaniment (bass, possibly guitar/piano). The texture is intimate and sparse, with few instruments. At times the bass plays a counter-melody, creating brief moments of polyphony (two independent melodic lines). The stripped-back texture puts the focus on Spalding's vocal and bass interplay — a conversation between the two." },
+          { heading: "Key Exam Points", content: "Compare with 'Release': both draw on non-Western musical traditions but in very different ways (Spalding = Brazilian bossa nova; Afro Celt = Celtic/African fusion). Compare with 'Killer Queen': both feature sophisticated chromatic harmony but in different styles (jazz vs rock). The dual role of Spalding as vocalist and bassist is distinctive. Know the characteristics of bossa nova as a genre. The use of Portuguese lyrics connects to the Brazilian musical tradition. The intimate, sparse texture contrasts with the dense layering in 'Release'." },
+        ],
+        quiz: [
+          { q: "Who originally composed 'Samba Em Prelúdio'?", options: ["Esperanza Spalding", "Baden Powell and Vinicius de Moraes", "João Gilberto", "Antônio Carlos Jobim"], correct: 1 },
+          { q: "What genre does 'Samba Em Prelúdio' belong to?", options: ["Jazz fusion", "Bossa nova", "Traditional samba", "Afrobeat"], correct: 1 },
+          { q: "What is distinctive about Esperanza Spalding's performance?", options: ["She plays electric guitar and sings", "She plays drums and sings", "She plays acoustic bass and sings", "She plays piano and sings"], correct: 2 },
+          { q: "In what language are the lyrics of 'Samba Em Prelúdio' sung?", options: ["Spanish", "English", "Portuguese", "French"], correct: 2 },
+          { q: "Bossa nova emerged in which country in the late 1950s?", options: ["Argentina", "Cuba", "Mexico", "Brazil"], correct: 3 },
+          { q: "The harmony in 'Samba Em Prelúdio' features:", options: ["Simple major/minor triads only", "Extended jazz chords (7ths, 9ths, altered chords)", "Power chords", "No harmony — it is monophonic"], correct: 1 },
+          { q: "How does bossa nova rhythm differ from traditional samba?", options: ["It is faster and louder", "It is gentler and more understated", "It uses no syncopation", "It is in 3/4 time"], correct: 1 },
+          { q: "The texture of Spalding's 'Samba Em Prelúdio' is best described as:", options: ["Dense and heavily layered", "Intimate and sparse — voice with bass accompaniment", "Thick orchestral texture", "Electronic and synthesised"], correct: 1 },
+          { q: "What is the role of the bass in this piece?", options: ["Only rhythmic — keeping the beat", "Both harmonic (outlining chords) and melodic (counter-melodies)", "Purely decorative", "It replaces the drums"], correct: 1 },
+          { q: "Comparing 'Samba Em Prelúdio' with 'Release', a key difference in texture is:", options: ["Both are equally dense", "Spalding's is intimate and sparse; 'Release' builds through dense layering", "'Release' is sparser than Spalding's version", "Both use identical instrumentation"], correct: 1 },
+        ],
+      },
+      {
         id: "elements",
         title: "Musical Elements (Listening Exam Skills)",
         notes: [
@@ -103,6 +155,17 @@ const SUBJECTS = {
           { q: "What does 'modulation' mean?", options: ["Playing more quietly", "Changing key during a piece", "A type of rhythm", "Repeating a pattern"], correct: 1 },
           { q: "What is the term for music based on notes within the key?", options: ["Chromatic", "Diatonic", "Atonal", "Pentatonic"], correct: 1 },
           { q: "An anacrusis is:", options: ["A note held for a long time", "Notes played before the first strong beat", "A sudden loud note", "The final chord of a piece"], correct: 1 },
+          // Day 3 questions
+          { q: "What is an 'appoggiatura'?", options: ["A type of drum", "A leaning note that resolves to a main note", "A fast scale passage", "A type of rest"], correct: 1 },
+          { q: "What is 'terraced dynamics'?", options: ["Gradual crescendo", "Sudden, abrupt changes between loud and quiet", "Playing at the same volume throughout", "Dynamics that get progressively softer"], correct: 1 },
+          { q: "In music, 'timbre' refers to:", options: ["How fast the music is", "The quality or colour of a sound", "How loud the music is", "The pattern of beats"], correct: 1 },
+          { q: "What does 'rallentando' mean?", options: ["Getting faster", "Getting louder", "Gradually slowing down", "Playing staccato"], correct: 2 },
+          { q: "A 'riff' is most commonly associated with which genre?", options: ["Classical symphony", "Pop and rock music", "Opera", "Gregorian chant"], correct: 1 },
+          { q: "What is the difference between 'binary' and 'ternary' form?", options: ["Binary = AB; ternary = ABA", "Binary = ABA; ternary = AB", "Binary = ABAB; ternary = ABC", "They are identical"], correct: 0 },
+          { q: "What does 'pianissimo' (pp) mean?", options: ["Very loud", "Moderately quiet", "Very quiet", "Suddenly loud"], correct: 2 },
+          { q: "A 'tritone' is an interval of:", options: ["Two semitones", "Three tones (augmented 4th/diminished 5th)", "Five tones", "One octave"], correct: 1 },
+          { q: "What does 'accelerando' mean?", options: ["Getting slower", "Getting quieter", "Getting faster", "Getting louder"], correct: 2 },
+          { q: "What is 'word painting' in music?", options: ["Writing lyrics on sheet music", "When the music reflects or illustrates the meaning of the words", "Painting pictures while listening to music", "A type of notation"], correct: 1 },
         ],
       },
     ],
@@ -162,6 +225,12 @@ const SUBJECTS = {
           { q: "The novella form was significant because:", options: ["It was the only form Dickens could write", "It was shorter and cheaper, making it accessible to more people", "It was required by law", "It was more prestigious"], correct: 1 },
           { q: "What does the motif of warmth and cold symbolise throughout the novella?", options: ["Weather changes", "Cold = isolation/greed vs warmth = love/community", "Nothing — it's literal", "Scrooge's health"], correct: 1 },
           { q: "What is the purpose of Dickens' use of the supernatural?", options: ["To entertain children only", "To create a framework for Scrooge's moral education and transformation", "To prove ghosts exist", "To scare the reader"], correct: 1 },
+          // Day 3 questions
+          { q: "What is the significance of Scrooge's door knocker transforming into Marley's face?", options: ["It shows Scrooge is drunk", "The supernatural intrudes on the real world — Scrooge can no longer escape his guilt", "It proves Marley is alive", "It is a coincidence"], correct: 1 },
+          { q: "Dickens uses listing in 'A Christmas Carol' to:", options: ["Make the text longer", "Create a sense of abundance (Christmas) or accumulation (Scrooge's sins)", "Show off his vocabulary", "Confuse the reader"], correct: 1 },
+          { q: "What does Scrooge's transformation suggest about Dickens' view of Victorian society?", options: ["The wealthy are beyond saving", "Anyone can change if they choose compassion over greed", "Only the poor can be kind", "Society is perfect as it is"], correct: 1 },
+          { q: "Why does Dickens describe the Ghost of Christmas Present sitting among a feast?", options: ["To show off food", "Generosity and abundance — contrasting with Scrooge's miserliness", "Because it's set at Christmas dinner", "To advertise products"], correct: 1 },
+          { q: "The adjective 'solitary' applied to Scrooge emphasises his:", options: ["Bravery", "Self-imposed isolation from humanity", "Intelligence", "Wealth"], correct: 1 },
         ],
       },
       {
@@ -184,6 +253,12 @@ const SUBJECTS = {
           { q: "In 'Sonnet 29', the speaker compares her thoughts about her lover to:", options: ["Stars in the sky", "Wild vines twining around a tree", "Waves crashing on shore", "Birds flying south"], correct: 1 },
           { q: "In 'The Farmer's Bride', what is the bride compared to when she runs?", options: ["A deer", "A hare", "A bird", "A fox"], correct: 1 },
           { q: "In 'Before You Were Mine', who is the speaker addressing?", options: ["Her daughter", "Her mother before she was born", "Her best friend", "Her grandmother"], correct: 1 },
+          // Day 3 questions
+          { q: "In 'Follower', the roles between father and son eventually:", options: ["Stay the same throughout", "Reverse — the father now follows the son", "Both become farmers", "The father disappears"], correct: 1 },
+          { q: "In 'Love's Philosophy', Shelley uses nature to argue for:", options: ["Staying apart", "Physical love and union", "Friendship over romance", "Religious devotion"], correct: 1 },
+          { q: "In 'Climbing My Grandfather', the extended metaphor compares the grandfather to:", options: ["A tree", "A mountain to climb", "A river", "A building"], correct: 1 },
+          { q: "In 'Letters From Yorkshire', the two people are connected despite:", options: ["Living in different countries", "Living different lives — rural vs intellectual", "Speaking different languages", "Never having met"], correct: 1 },
+          { q: "In 'When We Two Parted', Byron's tone towards the former lover is:", options: ["Joyful and grateful", "Bitter, secretive, and sorrowful", "Indifferent and casual", "Angry and vengeful"], correct: 1 },
         ],
       },
     ],
@@ -237,6 +312,17 @@ const SUBJECTS = {
           { q: "What makes metals malleable?", options: ["Weak bonds", "Layers of atoms can slide over each other while delocalised electrons hold them together", "They contain no electrons", "They have covalent bonds"], correct: 1 },
           { q: "Graphite is unusual for a giant covalent structure because it:", options: ["Has a low melting point", "Conducts electricity due to delocalised electrons between layers", "Dissolves easily in water", "Is an ionic compound"], correct: 1 },
           { q: "In an ionic lattice, the strong electrostatic forces act in:", options: ["One direction only", "Two directions", "All directions", "No directions — they are weak"], correct: 2 },
+          // Day 3 questions
+          { q: "What type of bonding is found in sodium chloride (NaCl)?", options: ["Covalent", "Metallic", "Ionic", "Hydrogen bonding"], correct: 2 },
+          { q: "Why do simple molecular substances have low boiling points?", options: ["Their covalent bonds are weak", "The intermolecular forces between molecules are weak", "They have no bonds at all", "Their ions can move freely"], correct: 1 },
+          { q: "How many electrons does a chlorine atom need to gain to have a full outer shell?", options: ["1", "2", "7", "3"], correct: 0 },
+          { q: "What is the electron configuration of sodium (atomic number 11)?", options: ["2, 8, 1", "2, 8, 2", "2, 1, 8", "1, 8, 2"], correct: 0 },
+          { q: "Group 1 elements are called:", options: ["Noble gases", "Halogens", "Transition metals", "Alkali metals"], correct: 3 },
+          { q: "What happens to reactivity going down Group 1?", options: ["Decreases", "Stays the same", "Increases", "Becomes zero"], correct: 2 },
+          { q: "What happens to reactivity going down Group 7 (halogens)?", options: ["Increases", "Stays the same", "Decreases", "Doubles"], correct: 2 },
+          { q: "A dot-and-cross diagram for a covalent bond shows:", options: ["Electron transfer between atoms", "Shared pairs of electrons between atoms", "The arrangement of ions in a lattice", "The shape of the molecule"], correct: 1 },
+          { q: "Silicon dioxide (SiO₂) has a very high melting point because:", options: ["It has weak intermolecular forces", "It is a giant covalent structure with many strong covalent bonds", "It has ionic bonds", "It has metallic bonds"], correct: 1 },
+          { q: "The relative atomic mass of chlorine is 35.5 because:", options: ["Chlorine has half a neutron", "It is the weighted average of its isotopes (Cl-35 and Cl-37)", "The periodic table has a printing error", "Chlorine atoms lose mass over time"], correct: 1 },
         ],
       },
     ],
@@ -342,6 +428,17 @@ const SUBJECTS = {
           { q: "What were book burnings designed to do?", options: ["Save paper", "Destroy 'un-German' ideas and control intellectual life", "Celebrate German literature", "Reduce fire risk"], correct: 1 },
           { q: "Jesse Owens at the 1936 Olympics undermined Nazi ideology because:", options: ["He refused to compete", "A Black American athlete won four gold medals, contradicting 'Aryan supremacy'", "He was German", "He supported the Nazis"], correct: 1 },
           { q: "What happened to Hans and Sophie Scholl of the White Rose group?", options: ["They escaped to Switzerland", "They were executed for distributing anti-Nazi leaflets", "They joined the Nazi Party", "They were imprisoned but survived the war"], correct: 1 },
+          // Day 3 questions
+          { q: "What was Gleichschaltung?", options: ["A type of German bread", "The Nazi policy of 'coordination' — bringing all aspects of life under Nazi control", "A military strategy", "The German word for democracy"], correct: 1 },
+          { q: "Why was the Concordat with the Pope (July 1933) significant?", options: ["It banned Catholicism", "It gave the Nazis respectability by gaining the Church's agreement to stay out of politics", "It forced priests to join the Nazi Party", "It had no significance"], correct: 1 },
+          { q: "What was the DAF (German Labour Front)?", options: ["A political party", "The Nazi replacement for banned trade unions", "A branch of the army", "A school for workers"], correct: 1 },
+          { q: "What was the Volksgemeinschaft?", options: ["A type of car", "The Nazi ideal of a 'people's community' united by race and loyalty to the Führer", "A radio station", "The German parliament"], correct: 1 },
+          { q: "How did the Nazis use the 1936 Berlin Olympics?", options: ["To promote peace", "As propaganda to showcase Nazi Germany as modern and powerful", "To encourage immigration", "To protest against other nations"], correct: 1 },
+          { q: "What was the Strength Through Joy (KdF) programme?", options: ["A military training programme", "A Nazi leisure organisation offering holidays, sports, and cultural events to workers", "A school curriculum", "A women's organisation"], correct: 1 },
+          { q: "What was the Rentenmark and why was it important?", options: ["A type of bond", "A new currency introduced in Nov 1923 that ended hyperinflation", "A tax on wealthy Germans", "A foreign loan"], correct: 1 },
+          { q: "What was the Locarno Pact (1925)?", options: ["A secret military alliance", "Germany accepted its western borders, improving relations with France and Britain", "A trade agreement with Russia", "A plan to rebuild the German navy"], correct: 1 },
+          { q: "Why were the Nuremberg Laws (1935) a turning point in the persecution of Jews?", options: ["They were the first anti-Jewish laws", "They legally stripped Jews of citizenship and made discrimination official state policy", "They allowed Jews to leave Germany", "They were only temporary measures"], correct: 1 },
+          { q: "What was the significance of Kristallnacht for Jewish life in Germany?", options: ["It improved conditions for Jews", "It marked the shift from legal discrimination to open, violent persecution", "It was a minor incident", "It only affected one city"], correct: 1 },
         ],
       },
     ],
@@ -445,6 +542,17 @@ const SUBJECTS = {
           { q: "A class has interval 10-20 and frequency 15. What is the frequency density?", a: "Class width = 10. Frequency density = 15 ÷ 10 = 1.5", options: ["15", "1.5", "150", "0.5"], correct: 1 },
           { q: "How is frequency density calculated?", options: ["Frequency × class width", "Frequency ÷ class width", "Class width ÷ frequency", "Cumulative frequency ÷ total"], correct: 1 },
           { q: "In a box plot, the 'box' represents:", options: ["The full range of data", "The interquartile range (LQ to UQ)", "The mean and mode", "Only the outliers"], correct: 1 },
+          // Day 3 questions
+          { q: "Solve: 2x² - 8 = 0", options: ["x = 2 or x = -2", "x = 4 or x = -4", "x = 8", "x = 2 only"], correct: 0 },
+          { q: "Simplify: √18 + √2", options: ["√20", "4√2", "3√2 + √2 = 4√2", "2√9"], correct: 1 },
+          { q: "What is 8^(2/3)?", options: ["4", "16", "2", "6"], correct: 0 },
+          { q: "A price after a 25% increase is £75. What was the original price?", options: ["£56.25", "£60", "£50", "£93.75"], correct: 1 },
+          { q: "In a right triangle, the adjacent side is 5 and the hypotenuse is 13. What is cos θ?", options: ["5/13", "12/13", "13/5", "5/12"], correct: 0 },
+          { q: "What is tan 45°?", options: ["0", "½", "1", "√2"], correct: 2 },
+          { q: "The gradient of a distance-time graph represents:", options: ["Acceleration", "Speed", "Force", "Distance"], correct: 1 },
+          { q: "Expand and simplify: (2x + 3)²", options: ["4x² + 9", "4x² + 12x + 9", "2x² + 6x + 9", "4x² + 6x + 9"], correct: 1 },
+          { q: "What is the HCF of 24 and 36?", options: ["6", "12", "72", "4"], correct: 1 },
+          { q: "Convert 0.00072 to standard form:", options: ["7.2 × 10⁻⁴", "72 × 10⁻⁵", "7.2 × 10⁻³", "0.72 × 10⁻³"], correct: 0 },
         ],
       },
     ],
@@ -559,6 +667,17 @@ const SUBJECTS = {
           { q: "Why can convection only happen in fluids, not solids?", a: "Because convection requires particles to move and flow — in a fluid, heated particles can rise (becoming less dense) and cooler particles can sink. In a solid, particles are fixed in position.", options: ["Solids don't absorb heat", "Fluid particles can move and flow; solid particles are fixed", "Solids are always cold", "Convection needs electricity"], correct: 1 },
           { q: "A perfect black body:", options: ["Reflects all radiation", "Absorbs all radiation incident on it", "Emits no radiation", "Only absorbs visible light"], correct: 1 },
           { q: "The temperature of a body increases when:", options: ["It emits more radiation than it absorbs", "It absorbs radiation faster than it emits it", "It reflects all radiation", "It is in a vacuum"], correct: 1 },
+          // Day 3 questions
+          { q: "A gamma ray is:", options: ["A helium nucleus", "A high-speed electron", "An electromagnetic wave from the nucleus", "A neutron"], correct: 2 },
+          { q: "What is nuclear fusion?", options: ["Splitting a large nucleus", "Joining two light nuclei to form a heavier one", "Absorbing a neutron", "Emitting an alpha particle"], correct: 1 },
+          { q: "An object at terminal velocity has:", options: ["Increasing speed", "Zero resultant force (drag equals weight)", "No air resistance", "Maximum acceleration"], correct: 1 },
+          { q: "What is the equation for momentum?", options: ["p = mv", "p = ma", "p = Fs", "p = mgh"], correct: 0 },
+          { q: "A 60 kg person climbs 5m. What GPE do they gain? (g = 10 m/s²)", options: ["300 J", "3000 J", "600 J", "30 J"], correct: 1 },
+          { q: "In a parallel circuit, the potential difference across each branch is:", options: ["Shared between components", "Zero", "The same across all branches", "Different for each branch"], correct: 2 },
+          { q: "What does a flat line on a velocity-time graph represent?", options: ["Acceleration", "Constant velocity", "Deceleration", "Stationary"], correct: 1 },
+          { q: "Specific latent heat of vaporisation is the energy needed to:", options: ["Heat 1 kg by 1°C", "Change 1 kg of liquid to gas at constant temperature", "Change 1 kg of solid to liquid", "Cool 1 kg by 1°C"], correct: 1 },
+          { q: "What is the relationship between pressure and volume for a fixed mass of gas at constant temperature?", options: ["Both increase together", "As volume decreases, pressure increases (inversely proportional)", "They are unrelated", "Both decrease together"], correct: 1 },
+          { q: "An LDR in a dark room has:", options: ["Low resistance", "High resistance", "Zero resistance", "Infinite current"], correct: 1 },
         ],
       },
     ],
@@ -619,6 +738,17 @@ const SUBJECTS = {
           { q: "What tense is 'je jouerai au football'?", options: ["Present", "Past (passé composé)", "Imperfect", "Future (simple future)"], correct: 3 },
           { q: "Translate: 'Il faut protéger l'environnement'", options: ["He wants to protect the environment", "We must/It is necessary to protect the environment", "I like the environment", "The environment is protected"], correct: 1 },
           { q: "What does a justified opinion require in French writing?", options: ["Just stating 'c'est bien'", "An opinion word followed by 'parce que/car' with a reason", "Only using the present tense", "Writing in English"], correct: 1 },
+          // Day 3 questions
+          { q: "What is the conditional of 'avoir' (je)?", options: ["J'ai", "J'avais", "J'aurais", "J'aurai"], correct: 2 },
+          { q: "Translate: 'Je me suis bien amusé(e)'", options: ["I am having fun", "I had a good time", "I will have fun", "I am bored"], correct: 1 },
+          { q: "What does 'pourtant' mean?", options: ["Therefore", "However", "Because", "Also"], correct: 1 },
+          { q: "Translate: 'Il pleut depuis trois jours'", options: ["It will rain for three days", "It rained three days ago", "It has been raining for three days", "It never rains"], correct: 2 },
+          { q: "How do you say 'I would like to travel' in French?", options: ["Je veux voyager", "J'aimerais voyager", "Je voyage", "J'ai voyagé"], correct: 1 },
+          { q: "What is the imperfect tense of 'faire' (il)?", options: ["Il fait", "Il fera", "Il faisait", "Il a fait"], correct: 2 },
+          { q: "What does 'néanmoins' mean?", options: ["Never", "Nevertheless/however", "Always", "Sometimes"], correct: 1 },
+          { q: "Translate: 'Je suis allée au cinéma hier soir'", options: ["I go to the cinema this evening", "I went to the cinema last night", "I will go to the cinema tomorrow", "I like the cinema"], correct: 1 },
+          { q: "What is 'rester' a faux ami for?", options: ["To rest (it actually means 'to stay')", "To eat", "To run", "To restore"], correct: 0 },
+          { q: "Which tense uses the stem of the future tense + imperfect endings?", options: ["Passé composé", "Imperfect", "Conditional", "Pluperfect"], correct: 2 },
         ],
       },
     ],
@@ -726,6 +856,17 @@ const SUBJECTS = {
           { q: "What is an extremophile? Give an example.", a: "An organism adapted to live in extreme conditions (very high temperature, pressure, or salt concentration). Example: bacteria living in deep-sea hydrothermal vents.", options: ["A plant in a garden", "An organism adapted to extreme conditions, e.g. deep-sea vent bacteria", "Any animal that hibernates", "A type of fungus"], correct: 1 },
           { q: "What equipment is used to sample organisms in a habitat?", options: ["A microscope", "Quadrats and transects", "A Bunsen burner", "Litmus paper"], correct: 1 },
           { q: "In a predator-prey relationship, what happens to predator numbers when prey increases?", options: ["They decrease immediately", "They increase (with a time lag)", "They stay exactly the same", "They become extinct"], correct: 1 },
+          // Day 3 questions
+          { q: "What is the function of the coronary arteries?", options: ["Carry blood to the brain", "Supply the heart muscle itself with oxygenated blood", "Carry blood to the lungs", "Return blood to the heart"], correct: 1 },
+          { q: "Why are red blood cells biconcave in shape?", options: ["To carry more carbon dioxide", "To increase surface area for oxygen absorption", "To help blood clot", "To fight infection"], correct: 1 },
+          { q: "What is the word equation for anaerobic respiration in human muscle?", options: ["Glucose → ethanol + CO₂", "Glucose → lactic acid", "Glucose + oxygen → CO₂ + water", "Glucose → amino acids"], correct: 1 },
+          { q: "In meiosis, the chromosome number is:", options: ["Doubled", "Kept the same", "Halved", "Tripled"], correct: 2 },
+          { q: "A carrier of cystic fibrosis has the genotype:", options: ["FF", "Ff", "ff", "XY"], correct: 1 },
+          { q: "What type of competition is usually more intense — intraspecific or interspecific?", options: ["Interspecific (between species)", "Intraspecific (within species)", "They are always equal", "Neither causes competition"], correct: 1 },
+          { q: "What is the function of white blood cells called phagocytes?", options: ["Produce antibodies", "Engulf and digest pathogens", "Carry oxygen", "Help blood clot"], correct: 1 },
+          { q: "Statins are used to treat coronary heart disease by:", options: ["Widening arteries physically", "Reducing blood cholesterol levels", "Replacing heart valves", "Increasing blood pressure"], correct: 1 },
+          { q: "What is a mutation?", options: ["A type of cell division", "A change in the DNA sequence", "The movement of chromosomes", "A type of reproduction"], correct: 1 },
+          { q: "What is the role of the natural pacemaker in the heart?", options: ["To filter blood", "To control the resting heart rate by producing electrical impulses", "To oxygenate blood", "To produce red blood cells"], correct: 1 },
         ],
       },
     ],
@@ -785,6 +926,17 @@ const SUBJECTS = {
           { q: "What does a NOR gate do?", options: ["Gives 1 when all inputs are 1", "Gives 1 only when all inputs are 0", "Gives 1 when any input is 1", "Inverts a single input"], correct: 1 },
           { q: "A flip-flop circuit is used for:", options: ["Amplifying signals", "Storing one bit of data (memory)", "Converting analogue to digital", "Measuring resistance"], correct: 1 },
           { q: "In a truth table for an OR gate with inputs A=0 and B=1, the output is:", options: ["0", "1", "Undefined", "It depends on the voltage"], correct: 1 },
+          // Day 3 questions
+          { q: "What is the output of a NAND gate when both inputs are 1?", options: ["1", "0", "Undefined", "It alternates"], correct: 1 },
+          { q: "Convert decimal 9 to binary:", options: ["1001", "1010", "1100", "0110"], correct: 0 },
+          { q: "In a voltage divider, if R₁ = 2kΩ and R₂ = 8kΩ with a 10V supply, what is V_out?", options: ["2V", "4V", "8V", "5V"], correct: 2 },
+          { q: "A transistor turns on when the base voltage exceeds approximately:", options: ["0.3V", "0.7V", "1.5V", "5V"], correct: 1 },
+          { q: "What is the time constant formula for an RC circuit?", options: ["τ = R + C", "τ = R/C", "τ = RC", "τ = C/R"], correct: 2 },
+          { q: "An astable circuit produces:", options: ["A single output pulse", "A continuous oscillating square wave", "A constant DC output", "No output"], correct: 1 },
+          { q: "What happens to the voltage across a capacitor as it charges?", options: ["Decreases", "Increases", "Stays constant", "Drops to zero immediately"], correct: 1 },
+          { q: "A diode allows current to flow in:", options: ["Both directions equally", "One direction only (forward biased)", "No directions", "All directions at once"], correct: 1 },
+          { q: "The forward voltage drop across a silicon diode is approximately:", options: ["0.2V", "0.7V", "1.5V", "5V"], correct: 1 },
+          { q: "What is the purpose of a base resistor when using a transistor as a switch?", options: ["To increase base current", "To limit the base current and protect the transistor", "To make the LED brighter", "To store charge"], correct: 1 },
         ],
       },
     ],
@@ -928,28 +1080,8 @@ function QuizView({ topic, subjectColor }) {
     return <p style={{ color: "var(--text-secondary)", fontFamily: "'DM Sans', sans-serif" }}>No quiz questions available for this topic yet.</p>;
   }
 
-  // Shuffle options for each question so the correct answer isn't always in the same position.
-  // shuffleKey changes on restart to re-shuffle.
-  const [shuffleKey, setShuffleKey] = useState(0);
-  const shuffledQuestions = useMemo(() => {
-    return questions.map((q) => {
-      const originalCorrect = q.correct !== undefined ? q.correct : 0;
-      // Create index array [0,1,2,3] and shuffle it
-      const indices = q.options.map((_, i) => i);
-      for (let i = indices.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [indices[i], indices[j]] = [indices[j], indices[i]];
-      }
-      return {
-        ...q,
-        shuffledOptions: indices.map((i) => q.options[i]),
-        shuffledCorrectIdx: indices.indexOf(originalCorrect),
-      };
-    });
-  }, [topic.id, shuffleKey]);
-
-  const q = shuffledQuestions[current];
-  const correctIdx = q.shuffledCorrectIdx;
+  const q = questions[current];
+  const correctIdx = q.correct !== undefined ? q.correct : 0; // All questions should have explicit correct index
 
   const handleSelect = (idx) => {
     if (showAnswer) return;
@@ -981,7 +1113,6 @@ function QuizView({ topic, subjectColor }) {
     setShowAnswer(false);
     setFinished(false);
     setWrongOnes([]);
-    setShuffleKey((k) => k + 1);
   };
 
   if (finished) {
@@ -1030,7 +1161,7 @@ function QuizView({ topic, subjectColor }) {
         {q.q}
       </h3>
       <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-        {q.shuffledOptions.map((opt, idx) => {
+        {q.options.map((opt, idx) => {
           let bg = "var(--option-bg)";
           let border = "1px solid var(--option-border)";
           let col = "var(--text-primary)";
