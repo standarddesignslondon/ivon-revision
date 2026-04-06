@@ -75,7 +75,7 @@ const SUBJECTS = {
           { q: "What underpins much of the harmony in 'Release'?", a: "Drones and ostinato patterns, rather than conventional chord progressions.", options: ["Complex jazz chords", "Standard chord progressions (I-IV-V)", "Drones and ostinato patterns", "Twelve-bar blues"], correct: 2 },
           { q: "What electronic production techniques are used in the track?", a: "Sampling, looping, multi-track recording, effects processing (reverb, delay), drum machines, and synthesisers.", options: ["Only acoustic recording", "Sampling, looping, and effects processing", "Auto-tune and pitch correction", "Orchestra and choir overdubs"], correct: 1 },
           { q: "What does 'modal' mean in the context of this piece's tonality?", a: "The music is based on modes (scales other than standard major/minor) — this gives it an ambiguous, neither-major-nor-minor quality.", options: ["The music follows major and minor keys strictly", "The music uses modes rather than major/minor keys", "The music has no tonal centre at all", "The music modulates frequently between keys"], correct: 1 },
-          { q: "What type of scale is common to both Celtic and African traditions in 'Release'?", options: ["Chromatic", "Whole-tone", "Pentatonic", "Blues"], correct: 2 },
+          { q: "What role does the bodhrán play in 'Release'?", options: ["Melodic — it plays the main tune", "Rhythmic — it is a Celtic frame drum providing percussion", "Harmonic — it plays chords", "It provides electronic effects"], correct: 1 },
           { q: "What electronic technique involves taking a small section of existing audio and reusing it?", options: ["Reverb", "Sampling", "Vibrato", "Transposition"], correct: 1 },
           { q: "What is the term for when instruments and layers are gradually added to build texture?", options: ["Diminution", "Layering / additive texture", "Stripping back", "Tutti"], correct: 1 },
           { q: "What type of drone instrument from Celtic tradition is heard in 'Release'?", options: ["Sitar", "Hurdy-gurdy", "Didgeridoo", "Harmonica"], correct: 1 },
@@ -502,7 +502,7 @@ const SUBJECTS = {
           { q: "What is cos 60°?", a: "½ (or 0.5)", options: ["√3/2", "1", "½", "0"], correct: 2 },
           { q: "A bearing must always be written as how many figures?", a: "Three figures (e.g. 045° not 45°), measured clockwise from North.", options: ["One figure", "Two figures", "Three figures", "Four figures"], correct: 2 },
           { q: "A right-angled triangle has shorter sides 3 cm and 4 cm. The hypotenuse is:", options: ["5 cm", "6 cm", "7 cm", "12 cm"], correct: 0 },
-          { q: "What is cos 60°?", options: ["0", "½", "√2/2", "√3/2"], correct: 1 },
+          { q: "What is sin 45°?", options: ["0", "½", "√2/2", "√3/2"], correct: 2 },
         ],
       },
       {
@@ -582,7 +582,7 @@ const SUBJECTS = {
           { q: "What is the difference between contamination and irradiation?", a: "Contamination is when radioactive material gets onto or into an object/person (the source is present). Irradiation is being exposed to radiation from a separate source (the object doesn't become radioactive).", options: ["They mean the same thing", "Contamination = material present; irradiation = exposure from a separate source", "Contamination is worse than irradiation always", "Irradiation makes objects radioactive"], correct: 1 },
           { q: "In beta decay, what happens inside the nucleus?", a: "A neutron changes into a proton and emits a high-speed electron (the beta particle). The mass number stays the same but the atomic number increases by 1.", options: ["A proton leaves the nucleus", "A neutron turns into a proton and emits an electron", "Two protons and two neutrons are released", "The nucleus splits in half"], correct: 1 },
           { q: "What is a chain reaction in nuclear fission?", a: "When the neutrons released by one fission event go on to cause further fissions in other nuclei, which release more neutrons, causing more fissions — and so on. In a reactor this is controlled; in a weapon it is uncontrolled.", options: ["When atoms combine together", "Neutrons from one fission cause more fissions, releasing more neutrons", "When radiation passes through materials", "When alpha particles are absorbed"], correct: 1 },
-          { q: "During beta decay, what happens inside the nucleus?", options: ["A proton turns into a neutron", "A neutron turns into a proton and emits an electron", "An electron is captured by a proton", "Two protons fuse together"], correct: 1 },
+          { q: "In alpha decay, the mass number decreases by 4 and the atomic number by:", options: ["1", "2", "3", "4"], correct: 1 },
           { q: "Activity of a radioactive source is measured in:", options: ["Joules", "Watts", "Becquerels (Bq)", "Hertz"], correct: 2 },
         ],
       },
@@ -647,7 +647,7 @@ const SUBJECTS = {
           { q: "Why does a bicycle pump get hot when you pump it?", a: "Compressing the gas does work on it, which increases the internal (kinetic) energy of the gas particles, raising the temperature.", options: ["Friction between the handle and pump", "Work done on the gas increases its internal energy", "The rubber melts slightly", "Air from outside heats it up"], correct: 1 },
           { q: "What is the equation linking pressure and volume at constant temperature?", a: "pV = constant (Boyle's Law). If volume decreases, pressure increases proportionally.", options: ["p = mv", "pV = constant", "p = ρgh", "E = mL"], correct: 1 },
           { q: "Why is specific latent heat of vaporisation always larger than specific latent heat of fusion?", a: "Because going from liquid to gas requires completely separating particles from each other (overcoming all remaining forces), whereas melting only requires loosening the arrangement — particles stay close together.", options: ["Because gases are hotter", "Vaporisation requires completely separating particles, needing more energy", "Because liquids are heavier", "It isn't always larger"], correct: 1 },
-          { q: "For a fixed mass of gas at constant temperature, pressure × volume =", options: ["Temperature", "Constant", "Zero", "Mass"], correct: 1 },
+          { q: "Why does gas pressure increase when temperature rises (at constant volume)?", options: ["Gas molecules expand in size", "Particles move faster, colliding more frequently and harder with container walls", "The container shrinks", "New gas molecules are created"], correct: 1 },
           { q: "When you pump a bicycle pump, the air gets hotter because:", options: ["Friction with the walls", "Work is done on the gas, increasing its internal energy", "The pump absorbs sunlight", "The air molecules slow down"], correct: 1 },
         ],
       },
@@ -733,7 +733,7 @@ const SUBJECTS = {
           { q: "Translate: 'Quand j'étais petit, je jouais au tennis'", a: "When I was little, I used to play tennis", options: ["When I am little, I play tennis", "When I was little, I used to play tennis", "When I will be little, I will play tennis", "I played tennis yesterday"], correct: 1 },
           { q: "What does 'actuellement' mean in French? (Careful — it's a faux ami!)", a: "Currently / at the moment (NOT 'actually')", options: ["Actually", "Currently / at the moment", "Occasionally", "Actively"], correct: 1 },
           { q: "What three things should you include in GCSE French writing to access higher marks?", a: "A range of tenses (past, present, future), opinions with justifications, and connectives/complex structures.", options: ["Long sentences only", "Range of tenses, opinions with justifications, connectives", "Perfect spelling only", "Only present tense but with lots of detail"], correct: 1 },
-          { q: "What is the correct passé composé of 'je mange'?", options: ["Je mangeais", "J'ai mangé", "Je mangerai", "Je mange"], correct: 1 },
+          { q: "What is the passé composé of 'elle partir' (she left)?", options: ["Elle a parti", "Elle est partie", "Elle partait", "Elle partira"], correct: 1 },
           { q: "Which verb uses 'être' as its auxiliary in the passé composé?", options: ["Manger", "Jouer", "Aller", "Regarder"], correct: 2 },
           { q: "What tense is 'je jouerai au football'?", options: ["Present", "Past (passé composé)", "Imperfect", "Future (simple future)"], correct: 3 },
           { q: "Translate: 'Il faut protéger l'environnement'", options: ["He wants to protect the environment", "We must/It is necessary to protect the environment", "I like the environment", "The environment is protected"], correct: 1 },
@@ -795,7 +795,7 @@ const SUBJECTS = {
           { q: "What is the difference between benign and malignant tumours?", a: "Benign tumours stay in one area (usually within a membrane) and don't spread. Malignant tumours (cancers) invade neighbouring tissues and can spread via the blood to form secondary tumours elsewhere.", options: ["Benign are larger", "Benign stay in one area; malignant invade and spread", "Malignant are harmless", "There is no difference"], correct: 1 },
           { q: "What is metabolism?", a: "The sum of all chemical reactions in a cell or the body — including respiration, synthesis of proteins/lipids/carbohydrates, and breakdown of excess proteins to urea.", options: ["Just respiration", "The sum of all chemical reactions in a cell or body", "Only the reactions that produce energy", "The rate at which you burn calories"], correct: 1 },
           { q: "What is the word equation for anaerobic respiration in yeast?", a: "glucose → ethanol + carbon dioxide (this process is called fermentation)", options: ["glucose → lactic acid", "glucose + oxygen → carbon dioxide + water", "glucose → ethanol + carbon dioxide", "ethanol → glucose + oxygen"], correct: 2 },
-          { q: "What is the word equation for aerobic respiration?", options: ["Glucose → lactic acid", "Glucose + oxygen → carbon dioxide + water", "Carbon dioxide + water → glucose + oxygen", "Glucose → ethanol + carbon dioxide"], correct: 1 },
+          { q: "Where in the cell does aerobic respiration take place?", options: ["Nucleus", "Cell membrane", "Mitochondria", "Ribosomes"], correct: 2 },
           { q: "During vigorous exercise, muscles may respire anaerobically. What is the waste product in anaerobic respiration in humans?", options: ["Carbon dioxide", "Ethanol", "Lactic acid", "Water"], correct: 2 },
         ],
       },
@@ -1075,13 +1075,35 @@ function QuizView({ topic, subjectColor }) {
   const [finished, setFinished] = useState(false);
   const [wrongOnes, setWrongOnes] = useState([]);
 
-  const questions = topic.quiz;
-  if (!questions || questions.length === 0) {
+  // Shuffle questions and options once on mount / topic change
+  const shuffledQuiz = useMemo(() => {
+    // Fisher-Yates shuffle
+    const shuffle = (arr) => {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    };
+    const rawQuestions = topic.quiz || [];
+    // Shuffle question order
+    const shuffledQs = shuffle(rawQuestions);
+    // For each question, shuffle the options and track the new correct index
+    return shuffledQs.map((q) => {
+      const correctText = q.options[q.correct !== undefined ? q.correct : 0];
+      const shuffledOptions = shuffle(q.options);
+      const newCorrectIdx = shuffledOptions.indexOf(correctText);
+      return { ...q, options: shuffledOptions, correct: newCorrectIdx };
+    });
+  }, [topic]);
+
+  if (!shuffledQuiz || shuffledQuiz.length === 0) {
     return <p style={{ color: "var(--text-secondary)", fontFamily: "'DM Sans', sans-serif" }}>No quiz questions available for this topic yet.</p>;
   }
 
-  const q = questions[current];
-  const correctIdx = q.correct !== undefined ? q.correct : 0; // All questions should have explicit correct index
+  const q = shuffledQuiz[current];
+  const correctIdx = q.correct;
 
   const handleSelect = (idx) => {
     if (showAnswer) return;
@@ -1096,7 +1118,7 @@ function QuizView({ topic, subjectColor }) {
   };
 
   const handleNext = () => {
-    if (current < questions.length - 1) {
+    if (current < shuffledQuiz.length - 1) {
       setCurrent((c) => c + 1);
       setSelected(null);
       setShowAnswer(false);
@@ -1116,12 +1138,12 @@ function QuizView({ topic, subjectColor }) {
   };
 
   if (finished) {
-    const pct = Math.round((score / questions.length) * 100);
+    const pct = Math.round((score / shuffledQuiz.length) * 100);
     return (
       <div style={{ textAlign: "center", padding: "40px 20px" }}>
         <div style={{ fontSize: 48, marginBottom: 12 }}>{pct >= 80 ? "🌟" : pct >= 60 ? "👍" : "📚"}</div>
         <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: 28, color: "var(--text-primary)", margin: "0 0 8px 0" }}>
-          {score} / {questions.length}
+          {score} / {shuffledQuiz.length}
         </h2>
         <p style={{ color: "var(--text-secondary)", fontFamily: "'DM Sans', sans-serif", fontSize: 14, marginBottom: 24 }}>
           {pct >= 80 ? "Excellent! You really know this material." : pct >= 60 ? "Good effort — review the ones you missed." : "Worth going over the notes again before retrying."}
@@ -1131,8 +1153,8 @@ function QuizView({ topic, subjectColor }) {
             <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, fontWeight: 700, color: "#e94560", margin: "0 0 12px 0" }}>REVIEW THESE:</h3>
             {wrongOnes.map((idx) => (
               <div key={idx} style={{ marginBottom: 12, paddingBottom: 12, borderBottom: "1px solid var(--card-border)" }}>
-                <p style={{ fontSize: 13, color: "var(--text-primary)", margin: "0 0 4px 0", fontWeight: 500, fontFamily: "'DM Sans', sans-serif" }}>{questions[idx].q}</p>
-                <p style={{ fontSize: 12, color: "#52b788", margin: 0, fontFamily: "'DM Sans', sans-serif" }}>✓ {questions[idx].a}</p>
+                <p style={{ fontSize: 13, color: "var(--text-primary)", margin: "0 0 4px 0", fontWeight: 500, fontFamily: "'DM Sans', sans-serif" }}>{shuffledQuiz[idx].q}</p>
+                <p style={{ fontSize: 12, color: "#52b788", margin: 0, fontFamily: "'DM Sans', sans-serif" }}>✓ {shuffledQuiz[idx].options[shuffledQuiz[idx].correct]}</p>
               </div>
             ))}
           </div>
@@ -1148,14 +1170,14 @@ function QuizView({ topic, subjectColor }) {
     <div>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
         <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12, color: "var(--text-secondary)" }}>
-          {current + 1} / {questions.length}
+          {current + 1} / {shuffledQuiz.length}
         </span>
         <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12, color: "#52b788" }}>
           Score: {score}
         </span>
       </div>
       <div style={{ background: "var(--card-bg)", borderRadius: 12, width: "100%", height: 4, marginBottom: 20, overflow: "hidden" }}>
-        <div style={{ background: subjectColor, height: "100%", width: `${((current + 1) / questions.length) * 100}%`, borderRadius: 4, transition: "width 0.3s ease" }} />
+        <div style={{ background: subjectColor, height: "100%", width: `${((current + 1) / shuffledQuiz.length) * 100}%`, borderRadius: 4, transition: "width 0.3s ease" }} />
       </div>
       <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, fontWeight: 600, color: "var(--text-primary)", margin: "0 0 20px 0", lineHeight: 1.5 }}>
         {q.q}
@@ -1189,15 +1211,17 @@ function QuizView({ topic, subjectColor }) {
             <p style={{ fontSize: 12, fontWeight: 600, color: selected === correctIdx ? "#52b788" : "#e94560", margin: "0 0 4px 0", fontFamily: "'DM Sans', sans-serif" }}>
               {selected === correctIdx ? "✓ Correct!" : "✗ Not quite"}
             </p>
-            <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0, fontFamily: "'DM Sans', sans-serif", lineHeight: 1.5 }}>
-              {q.a}
-            </p>
+            {q.a && (
+              <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0, fontFamily: "'DM Sans', sans-serif", lineHeight: 1.5 }}>
+                {q.a}
+              </p>
+            )}
           </div>
           <button
             onClick={handleNext}
             style={{ background: subjectColor, color: "#fff", border: "none", borderRadius: 10, padding: "12px 28px", cursor: "pointer", fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: 14, width: "100%" }}
           >
-            {current < questions.length - 1 ? "Next Question →" : "See Results"}
+            {current < shuffledQuiz.length - 1 ? "Next Question →" : "See Results"}
           </button>
         </div>
       )}
